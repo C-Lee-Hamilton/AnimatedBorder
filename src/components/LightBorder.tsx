@@ -131,11 +131,11 @@ position: absolute;
 `;
 const Content= styled.div<LightProps>`
     position:absolute;
-    top: ${(props)=>props.$borderWidth ?? 10}px; 
-    bottom:${(props)=>props.$borderWidth ?? 10}px;
-    left:${(props)=>props.$borderWidth ?? 10}px;
-    right:${(props)=>props.$borderWidth ?? 10}px;
-    z-index:1;
+    top: ${(props)=>props.$borderWidth ? props.$borderWidth-2: 8}px; 
+    bottom:${(props)=>props.$borderWidth ? props.$borderWidth-2: 8}px;
+    left:${(props)=>props.$borderWidth ? props.$borderWidth-2: 8}px;
+    right:${(props)=>props.$borderWidth ? props.$borderWidth-2: 8}px;
+    z-index:2;
     border: ${(props)=>props.$contentColor ?? "black"} 1px solid;
     border-radius:${(props)=>(props.$borderRadius ? props.$borderRadius / 2 : 0)}px;
     background-color:${(props)=>props.$contentColor ?? "black"} ;
