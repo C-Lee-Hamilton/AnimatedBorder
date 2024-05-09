@@ -10,16 +10,41 @@ body {
   height: 100vh;
   width: 100vw;
 }
+
 .App {
   font-family: sans-serif;
   text-align: center;
   height: 100vh;
   width: 100vw;
   margin: 0;
-  padding: 0;
+  padding: 0px;
   background-color: red;
 }
-h1 {
-  color: green;
+
+.button-test {
+  color: cyan;
+  height: 25%;
   margin: 10px;
+  width: 45%;
+  margin-top: 20px;
+  position: relative;
+
+  /* set padding to zero */
+  padding: 0;
+  /* remove border */
+  border: none;
+  /* if using border radius, apply same value */
+  border-radius: 10px;
+}
+
+.mini {
+  position: relative;
+  padding: 0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  height: 45%;
+  width: 45%;
 }
