@@ -9,14 +9,17 @@ export default function App(): JSX.Element {
       $borderWidth={20}
       $contentAlignY="center"
       $contentAlignX="center"
-      $color1="yellow"
-      $color2="lime"
-      $color3="cyan"
+      $color1="black"
+      $color2="black"
+      $color3="blue"
+      $rounded={true}
       >
      
      <LightButton
-     $borderWidth={4}
-     $borderRadius={100}
+     $fontsize=""
+    $borderWidth={5}
+     $rounded={true}
+    $onClick={()=>console.log("it worked again")}
      >tester</LightButton>
 
 

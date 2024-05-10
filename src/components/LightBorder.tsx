@@ -1,35 +1,31 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-interface LightProps {
+interface LightProps{
   $height?: string;
   $width?: string;
   $borderWidth?: number;
-  $borderRadius?: number;
+  $rounded?: boolean;
   $speed?: string;
   $contentColor?: string;
   $color1?: string;
   $color2?: string;
   $color3?: string;
+}
+
+interface DivProps {
   $contentAlignX?:string;
   $contentAlignY?:string;
 }
+interface ButtonProps{
+$fontsize?:string;
+$onClick?: () => void;
 
-
-const Content = styled.div<LightProps>`
-  position: absolute;
- padding:0px;
-  top: ${(props) => props.$borderWidth ?? 8}px;
-  bottom: ${(props) => props.$borderWidth ?? 8}px;
-  left: ${(props) => props.$borderWidth ?? 8}px;
-  right: ${(props) => props.$borderWidth ?? 8}px;
-  z-index: 1;
-
-  border: ${(props) => props.$contentColor ?? "black"} 1px solid;
-  border-radius: ${(props) =>
-    props.$borderRadius ? 5 : 0}px;
-  background-color: ${(props) => props.$contentColor ?? "black"};
-`;
+}
+interface SliderProps{
+  
+  $value?:number,
+}
 const DivContainer = styled.div<LightProps>`
   
   position: relative;
@@ -37,8 +33,22 @@ const DivContainer = styled.div<LightProps>`
   height: ${(props) => props.$height ?? "100%"};
   width: ${(props) => props.$width ?? "100%"};
 `;
+const DivContent = styled.div<LightProps>`
+  position: absolute;
+ padding:0px;
+  top: ${(props) => props.$borderWidth ? props.$borderWidth-2:  8}px;
+  bottom: ${(props) => props.$borderWidth ? props.$borderWidth-2:  8}px;
+  left: ${(props) => props.$borderWidth ? props.$borderWidth-2:  8}px;
+  right: ${(props) => props.$borderWidth ? props.$borderWidth-2:  8}px;
+  z-index: 2;
 
-const DivCenter=styled.div<LightProps>`
+  border: ${(props) => props.$contentColor ?? "black"} 1px solid;
+  border-radius: ${(props) =>
+    props.$rounded ? 5 : 0}px;
+  background-color: ${(props) => props.$contentColor ?? "black"};
+`;
+
+const DivCenter=styled.div<DivProps>`
 height:100%;
 width:100%;
 margin:auto;
@@ -46,25 +56,52 @@ justify-content: ${(props)=>props.$contentAlignX ?? "none"};
 align-items:${(props)=>props.$contentAlignY ?? "none"} ;
 display: flex;
 `
-const ButtonContainer = styled.div<LightProps>`
-  
+const ButtonContainer = styled.div<LightProps & ButtonProps >`
+height: ${(props) => props.$height ?? "30px"};
+width: ${(props) => props.$width ?? "100px"};
+font-size:${(props)=>props.$fontsize ?? "1em"};
+
   position: relative;
   :hover {
     cursor:pointer;
   }
   :active {
     transform:scale(.95);
+   
   }
 
 `;
-const ButtonCenter=styled.div<LightProps>`
-padding:10px;
+const Button=styled.div<LightProps >`
+
 height:100%;
+z-index:1;
 width:100%;
 justify-content:center;
 align-items:center;
 display:flex;
-position:relative;
+position:absolute;
+background-color: ${(props) => props.$contentColor ?? "black"};
+border-radius: ${(props)=> props.$rounded ? 10:0}px;
+
+
+`
+const ButtonContent=styled.div<LightProps> `
+justify-content:center;
+align-items:center;
+position:absolute;
+padding:10px;
+display:flex;
+z-index:1;
+ top: ${(props) => props.$borderWidth ? props.$borderWidth-3:  1}px;
+ bottom: ${(props) => props.$borderWidth ? props.$borderWidth-3:  1}px;
+ left: ${(props) => props.$borderWidth ? props.$borderWidth-3:  1}px;
+ right: ${(props) => props.$borderWidth ? props.$borderWidth-3:  .75}px;
+ 
+ border-radius: ${(props) =>
+  props.$rounded ? 5 : 0}px;
+
+background-color: ${(props) => props.$contentColor ?? "black"};
+
 
 `
 const Top = styled.div<LightProps>`
@@ -72,9 +109,9 @@ const Top = styled.div<LightProps>`
   top: 0;
   left: 0;
   right: 0;
-  height: ${(props) => props.$borderWidth ?? 10}px;
-  border-radius: ${(props) => props.$borderRadius ?? 0}px
-    ${(props) => props.$borderRadius ?? 0}px 0 0;
+  height: ${(props) => props.$borderWidth ?? 4}px;
+  border-radius: ${(props) => props.$rounded  ? 100: 0}px
+    ${(props) => props.$rounded ? 100: 0}px 0 0;
 
   animation: ColorTop ${(props) => props.$speed ?? "1s"} infinite linear;
   @keyframes ColorTop {
@@ -152,9 +189,10 @@ const Left = styled.div<LightProps>`
   top: 0;
   bottom: 0;
   left: 0;
-  width: ${(props) => props.$borderWidth ?? 10}px;
-  border-radius: ${(props) => props.$borderRadius ?? 0}px 0 0px
-    ${(props) => props.$borderRadius ?? 0}px;
+  
+  width: ${(props) => props.$borderWidth ?? 4}px;
+  border-radius: ${(props) => props.$rounded ? 100 : 0}px 0 0px
+    ${(props) => props.$rounded ? 100: 0}px;
   animation: ColorLeft ${(props) => props.$speed ?? "1s"} linear infinite;
   @keyframes ColorLeft {
     0% {
@@ -225,10 +263,11 @@ const Right = styled.div<LightProps>`
   top: 0;
   bottom: 0;
   right: 0;
-  width: ${(props) => props.$borderWidth ?? 10}px;
+  
+  width: ${(props) => props.$borderWidth ?? 4}px;
   animation: ColorRight ${(props) => props.$speed ?? "1s"} linear infinite;
-  border-radius: 0 ${(props) => props.$borderRadius ?? 0}px
-    ${(props) => props.$borderRadius ?? 0}px 0;
+  border-radius: 0 ${(props) => props.$rounded ? 100 : 0}px
+    ${(props) => props.$rounded ? 100: 0}px 0;
   @keyframes ColorRight {
     0% {
       background-image: linear-gradient(
@@ -298,10 +337,10 @@ const Bottom = styled.div<LightProps>`
   bottom: 0;
   left: 0;
   right: 0;
-  height: ${(props) => props.$borderWidth ?? 10}px;
+  height: ${(props) => props.$borderWidth ?? 4}px;
   animation: ColorBottom ${(props) => props.$speed ?? "1s"} linear infinite;
-  border-radius: 0 0 ${(props) => props.$borderRadius ?? 0}px
-    ${(props) => props.$borderRadius ?? 0}px;
+  border-radius: 0 0 ${(props) => props.$rounded ? 100 : 0}px
+    ${(props) => props.$rounded ? 100 : 0}px;
   @keyframes ColorBottom {
     0% {
       background-image: linear-gradient(
@@ -372,7 +411,7 @@ const Bottom = styled.div<LightProps>`
   }
 `;
 
-export const LightBorder: React.FC<{ children: ReactNode } & LightProps> = ({
+export const LightBorder: React.FC<{ children: ReactNode } & LightProps & DivProps> = ({
   children,
   ...props
 }) => {
@@ -386,13 +425,15 @@ export const LightBorder: React.FC<{ children: ReactNode } & LightProps> = ({
     <DivContainer {...props} style={cssVariables}>
       <Top {...props} />
       <Left {...props} />
-      <Content {...props}><DivCenter {...props}>{children}</DivCenter></Content>
+      <DivContent {...props}><DivCenter {...props}>{children}</DivCenter></DivContent>
       <Right {...props} />
       <Bottom {...props} />
     </DivContainer>
   );
 };
-export const LightButton: React.FC<{ children: ReactNode } & LightProps> = ({
+
+
+export const LightButton: React.FC<{ children: ReactNode } & LightProps & ButtonProps > = ({
  children,
   ...props
 }) => {
@@ -404,17 +445,22 @@ export const LightButton: React.FC<{ children: ReactNode } & LightProps> = ({
 
   return (
     
-    <ButtonContainer {...props} style={cssVariables}>
-     <ButtonCenter>
+    <ButtonContainer onClick={props.$onClick} {...props} style={cssVariables}>
+     <Button {...props}>
+     <ButtonContent {...props}>
+      {children}
+      </ButtonContent>
       <Top {...props} />
       <Left {...props} />
-      
-      {children}
-      
+   
       <Right {...props} />
+      
       <Bottom {...props} />
-      </ButtonCenter>
+     
+      </Button>
+    
     </ButtonContainer>
+    
    
   );
 };
