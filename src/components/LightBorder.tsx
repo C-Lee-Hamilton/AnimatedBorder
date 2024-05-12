@@ -11,29 +11,44 @@ interface LightProps{
   $color1?: string;
   $color2?: string;
   $color3?: string;
+  $fontsize?:string;
+  $fontColor?:string;
+  $textAlign?:string;
 }
 
 interface DivProps {
   $contentAlignX?:string;
   $contentAlignY?:string;
 }
-interface ButtonProps{
-$fontsize?:string;
-$onClick?: () => void;
-$margin?:string;
 
+interface ButtonProps{
+  onClick?: () => void;
+  $margin?:string;
 }
+
 interface SliderProps{
   min?:number,
   max?:number,
   step?:number,
   value?:number,
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; // Update the type here
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; 
   $roundedSelector?:boolean,
 }
+
+interface LoadbarProps{
+$loadValue?:number,
+}
+
+interface InputProps{
+  type?:string,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; 
+  value?:string,
+}
+
 const DivContainer = styled.div<LightProps>`
   
   position: relative;
+  
   
   height: ${(props) => props.$height ?? "100%"};
   width: ${(props) => props.$width ?? "100%"};
@@ -52,7 +67,6 @@ const DivContent = styled.div<LightProps>`
     props.$rounded ? 5 : 0}px;
   background-color: ${(props) => props.$contentColor ?? "black"};
 `;
-
 const DivCenter=styled.div<DivProps>`
 height:100%;
 width:100%;
@@ -61,11 +75,12 @@ justify-content: ${(props)=>props.$contentAlignX ?? "none"};
 align-items:${(props)=>props.$contentAlignY ?? "none"} ;
 display: flex;
 `
+
 const ButtonContainer = styled.div<LightProps & ButtonProps >`
-height: ${(props) => props.$height ?? "30px"};
-width: ${(props) => props.$width ?? "100px"};
+min-height: ${(props) => props.$height ?? "30px"};
+min-width: ${(props) => props.$width ?? "100px"};
 font-size:${(props)=>props.$fontsize ?? "1em"};
-margin:${(props)=>props.$margin ?? "auto"};
+
   position: relative;
   :hover {
     cursor:pointer;
@@ -109,12 +124,13 @@ background-color: ${(props) => props.$contentColor ?? "black"};
 
 
 `
+
 const SliderContainer=styled.div<LightProps & SliderProps>`
 
 width: ${(props)=>props.$width ?? "300px"};
 height: ${(props)=>props.$height ?? "20px"};
 padding:2px;
-
+position:relative;
 border-radius: ${(props)=>props.$roundedSelector ? "100px" : "0px"};
 
 animation: ColorSlide ${(props) => props.$speed ?? "1s"} infinite linear;
@@ -205,52 +221,416 @@ cursor: pointer;
  @keyframes ColorSlideSelect {
     
   0% {
-    box-shadow: 0px 0px 0px 4px var(--color2), 0px 0px 0px 5px var(--color3) inset, 0px 0px 0px 10px black inset;
-    background: var(--color1);
+    background-image: radial-gradient(var(--color1), black, var(--color2), black, var(--color3),var(--color3),var(--color3));
+
 
   }
   50% {
-    box-shadow: 0px 0px 0px 4px var(--color3), 0px 0px 0px 5px var(--color1) inset, 0px 0px 0px 10px black inset;
-    background: var(--color2);
+    background-image: radial-gradient(var(--color3), black, var(--color1), black, var(--color2),var(--color2),var(--color2));
+
   }
 
   
   100% {
-    box-shadow: 0px 0px 0px 4px var(--color1), 0px 0px 0px 5px var(--color2) inset, 0px 0px 0px 10px black inset;
-    background: var(--color3);
+    background-image: radial-gradient(var(--color2), black, var(--color3), black, var(--color1),var(--color1),var(--color1));
+
   }}
 
 &::-webkit-slider-thumb {
  
-  -webkit-appearance: none;
-  background: var(--color1);
-
+  appearance: none;
   background-origin: border-box;
   background-clip: content-box, border-box;
-  height:2.5em;
-  width:2.5em;
-  border: 4px black solid;
+  height:3em;
+  width:3em;
+  border: none;
   border-radius: ${(props)=>props.$roundedSelector ? "100px" : "0px"};
-  box-shadow: 0px 0px 0px 4px var(--color2), 0px 0px 0px 5px var(--color3) inset, 0px 0px 0px 10px black inset;
+  background-image: radial-gradient(var(--color1), black, var(--color2), black, var(--color3),var(--color3),var(--color3));
 
   animation: ColorSlideSelect 5s infinite linear;
+  
 
 }
 
 &::-moz-range-thumb {
   background-origin: border-box;
   background-clip: content-box, border-box;
-  height:2em;
-  width:2em;
-  border: 4px black solid;
+  height:3em;
+  width:3em;
+  border:none;
   border-radius: ${(props)=>props.$roundedSelector ? "100px" : "0px"};
-  background: var(--color1);
-  
-        animation: ColorSlideSelect 5s infinite reverse;
+  animation: ColorSlideSelect 5s infinite reverse;
 }
 
 
 `
+
+const TextDiv=styled.div<LightProps>`
+
+padding:0px;
+position:relative;
+margin:0px;
+
+`
+const TextContent=styled.button<LightProps>`
+border:none;
+cursor:default;
+padding:0px;
+margin:0px;
+position:relative;
+font-size:${(props)=>props.$fontsize ?? "25px"};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: ColorText ${(props) => props.$speed ?? "1s"} infinite linear;
+  @keyframes ColorText {
+    
+    0% {
+      background-image: linear-gradient(
+        to right,
+        var(--color1),
+        var(--color2),
+        var(--color2),
+        var(--color3),
+        var(--color3),
+        var(--color1)
+      );
+    }
+    20% {
+      background-image: linear-gradient(
+        to right,
+        var(--color1),
+        var(--color1),
+        var(--color2),
+        var(--color2),
+        var(--color3),
+        var(--color3)
+      );
+    }
+    40% {
+      background-image: linear-gradient(
+        to right,
+        var(--color3),
+        var(--color1),
+        var(--color1),
+        var(--color2),
+        var(--color2),
+        var(--color3)
+      );
+    }
+    60% {
+      background-image: linear-gradient(
+        to right,
+        var(--color3),
+        var(--color3),
+        var(--color1),
+        var(--color1),
+        var(--color2),
+        var(--color2)
+      );
+    }
+    80% {
+      background-image: linear-gradient(
+        to right,
+        var(--color2),
+        var(--color3),
+        var(--color3),
+        var(--color1),
+        var(--color1),
+        var(--color2)
+      );
+    }
+    100% {
+      background-image: linear-gradient(
+        to right,
+        var(--color2),
+        var(--color2),
+        var(--color3),
+        var(--color3),
+        var(--color1),
+        var(--color1)
+      );
+    }
+
+
+
+`
+
+const LoadbarContainer=styled.div<LightProps & LoadbarProps>`
+height:${(props)=>props.$height ?? "25px"};
+width:${(props)=>props.$width ?? "300px"};
+
+justify-content:center;
+align-items:center;
+display:flex;
+border-radius: ${(props) => props.$rounded  ? 100: 0}px;
+
+animation: ColorLoad ${(props) => props.$speed ?? "1s"} infinite linear;
+@keyframes ColorLoad {
+
+0% {
+  background-image: linear-gradient(
+    to right,
+    var(--color1),
+    var(--color2),
+    var(--color2),
+    var(--color3),
+    var(--color3),
+    var(--color1)
+  );
+}
+20% {
+  background-image: linear-gradient(
+    to right,
+    var(--color1),
+    var(--color1),
+    var(--color2),
+    var(--color2),
+    var(--color3),
+    var(--color3)
+  );
+}
+40% {
+  background-image: linear-gradient(
+    to right,
+    var(--color3),
+    var(--color1),
+    var(--color1),
+    var(--color2),
+    var(--color2),
+    var(--color3)
+  );
+}
+60% {
+  background-image: linear-gradient(
+    to right,
+    var(--color3),
+    var(--color3),
+    var(--color1),
+    var(--color1),
+    var(--color2),
+    var(--color2)
+  );
+}
+80% {
+  background-image: linear-gradient(
+    to right,
+    var(--color2),
+    var(--color3),
+    var(--color3),
+    var(--color1),
+    var(--color1),
+    var(--color2)
+  );
+}
+100% {
+  background-image: linear-gradient(
+    to right,
+    var(--color2),
+    var(--color2),
+    var(--color3),
+    var(--color3),
+    var(--color1),
+    var(--color1)
+  );
+}
+`
+const LoaderFill=styled.div<LightProps & LoadbarProps>`
+width:95%;
+height:90%;
+background-color:black;
+align-items:center;
+display:flex;
+padding-left:2px;
+padding-right:2px;
+border-radius: ${(props) => props.$rounded  ? 100: 0}px
+
+`
+const LoadbarContent=styled.div<LightProps & LoadbarProps>`
+height:80%;
+
+width:${(props)=>props.$loadValue ?? 0}%;
+border-radius: ${(props) => props.$rounded  ? 100: 0}px;
+
+animation: ColorLoad ${(props) => props.$speed ?? "1s"} infinite linear;
+@keyframes ColorLoad {
+
+0% {
+  background-image: linear-gradient(
+    to left,
+    var(--color1),
+    var(--color2),
+    var(--color2),
+    var(--color3),
+    var(--color3),
+    var(--color1)
+  );
+}
+20% {
+  background-image: linear-gradient(
+    to left,
+    var(--color1),
+    var(--color1),
+    var(--color2),
+    var(--color2),
+    var(--color3),
+    var(--color3)
+  );
+}
+40% {
+  background-image: linear-gradient(
+    to left,
+    var(--color3),
+    var(--color1),
+    var(--color1),
+    var(--color2),
+    var(--color2),
+    var(--color3)
+  );
+}
+60% {
+  background-image: linear-gradient(
+    to left,
+    var(--color3),
+    var(--color3),
+    var(--color1),
+    var(--color1),
+    var(--color2),
+    var(--color2)
+  );
+}
+80% {
+  background-image: linear-gradient(
+    to left,
+    var(--color2),
+    var(--color3),
+    var(--color3),
+    var(--color1),
+    var(--color1),
+    var(--color2)
+  );
+}
+100% {
+  background-image: linear-gradient(
+    to left,
+    var(--color2),
+    var(--color2),
+    var(--color3),
+    var(--color3),
+    var(--color1),
+    var(--color1)
+  );
+}
+`
+
+const InputContainer=styled.div<LightProps & InputProps>`
+height: ${(props) => props.$height ?? "40px"};
+width: ${(props) => props.$width ?? "200px"};
+
+
+padding:0px;
+  position: relative;
+  :hover {
+    cursor:text;
+  }
+`
+const InputBorder=styled.div<LightProps & InputProps>`
+height:100%;
+z-index:1;
+margin:0px;
+padding:1px;
+width:100%;
+justify-content:center;
+align-items:center;
+display:flex;
+position:absolute;
+
+`
+const InputContent=styled.input<LightProps & InputProps>`
+width:100%;
+height:80%;
+margin:0px;
+text-align:${(props)=>props.$textAlign ?? "center"};
+font-size:${(props)=>props.$fontsize ?? "1em"};
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: ColorInput ${(props) => props.$speed ?? "2s"} infinite linear;
+  @keyframes ColorInput {
+    
+    0% {
+      background-image: linear-gradient(
+        to right,
+        var(--color1),
+        var(--color2),
+        var(--color2),
+        var(--color3),
+        var(--color3),
+        var(--color1)
+      );
+    }
+    20% {
+      background-image: linear-gradient(
+        to right,
+        var(--color1),
+        var(--color1),
+        var(--color2),
+        var(--color2),
+        var(--color3),
+        var(--color3)
+      );
+    }
+    40% {
+      background-image: linear-gradient(
+        to right,
+        var(--color3),
+        var(--color1),
+        var(--color1),
+        var(--color2),
+        var(--color2),
+        var(--color3)
+      );
+    }
+    60% {
+      background-image: linear-gradient(
+        to right,
+        var(--color3),
+        var(--color3),
+        var(--color1),
+        var(--color1),
+        var(--color2),
+        var(--color2)
+      );
+    }
+    80% {
+      background-image: linear-gradient(
+        to right,
+        var(--color2),
+        var(--color3),
+        var(--color3),
+        var(--color1),
+        var(--color1),
+        var(--color2)
+      );
+    }
+    100% {
+      background-image: linear-gradient(
+        to right,
+        var(--color2),
+        var(--color2),
+        var(--color3),
+        var(--color3),
+        var(--color1),
+        var(--color1)
+      );
+    }
+
+
+
+
+
+
+`
+
+
 const Top = styled.div<LightProps>`
   position: absolute;
   top: 0;
@@ -404,7 +784,6 @@ const Left = styled.div<LightProps>`
     }
   }
 `;
-
 const Right = styled.div<LightProps>`
   position: absolute;
   top: 0;
@@ -478,7 +857,6 @@ const Right = styled.div<LightProps>`
     }
   }
 `;
-
 const Bottom = styled.div<LightProps>`
   position: absolute;
   bottom: 0;
@@ -558,6 +936,9 @@ const Bottom = styled.div<LightProps>`
   }
 `;
 
+
+
+
 export const LightBorder: React.FC<{ children: ReactNode } & LightProps & DivProps> = ({
   children,
   ...props
@@ -579,7 +960,6 @@ export const LightBorder: React.FC<{ children: ReactNode } & LightProps & DivPro
   );
 };
 
-
 export const LightButton: React.FC<{ children: ReactNode } & LightProps & ButtonProps > = ({
  children,
   ...props
@@ -592,7 +972,7 @@ export const LightButton: React.FC<{ children: ReactNode } & LightProps & Button
 
   return (
     
-    <ButtonContainer onClick={props.$onClick} {...props} style={cssVariables}>
+    <ButtonContainer onClick={props.onClick} {...props} style={cssVariables}>
      <Button {...props}>
      <ButtonContent {...props}>
       {children}
@@ -611,6 +991,7 @@ export const LightButton: React.FC<{ children: ReactNode } & LightProps & Button
    
   );
 };
+
 export const LightSlider: React.FC< LightProps & SliderProps > = ({
   
    ...props
@@ -627,6 +1008,76 @@ export const LightSlider: React.FC< LightProps & SliderProps > = ({
  
    
    </SliderContainer>
+    
+   );
+};
+
+export const LightText: React.FC< { children: ReactNode } & LightProps > = ({
+  children,
+  ...props
+}) => {
+  const cssVariables = {
+    '--color1': props.$color1 ?? "hotpink",
+    '--color2': props.$color2 ?? "cyan",
+    '--color3': props.$color3 ?? "lime"
+  } as React.CSSProperties
+
+  return (
+   <TextDiv {...props}>
+    <TextContent style={cssVariables} {...props}>{children}</TextContent>
+   </TextDiv>
+   
+  );
+};
+
+export const LightLoadbar: React.FC< LightProps & LoadbarProps > = ({
+ 
+  ...props
+}) => {
+  const cssVariables = {
+    '--color1': props.$color1 ?? "hotpink",
+    '--color2': props.$color2 ?? "cyan",
+    '--color3': props.$color3 ?? "lime"
+  } as React.CSSProperties
+
+  return (
+   <LoadbarContainer style={cssVariables} {...props}>
+
+    <LoaderFill {...props}>
+      
+    <LoadbarContent {...props} />
+    </LoaderFill>
+   </LoadbarContainer>
+   
+  );
+};
+
+export const LightInput: React.FC<LightProps & InputProps > = ({
+  
+   ...props
+ }) => {
+   const cssVariables = {
+     '--color1': props.$color1 ?? "hotpink",
+     '--color2': props.$color2 ?? "cyan",
+     '--color3': props.$color3 ?? "lime"
+   } as React.CSSProperties
+ 
+   return (
+     
+     <InputContainer {...props} style={cssVariables}>
+      <InputBorder {...props}>
+       <InputContent type={props.type} value={props.value} onChange={props.onChange} placeholder="..."{...props}/> 
+       <Top {...props} />
+       <Left {...props} />
+    
+       <Right {...props} />
+       
+       <Bottom {...props} />
+      
+       </InputBorder>
+     
+     </InputContainer>
+     
     
    );
  };
