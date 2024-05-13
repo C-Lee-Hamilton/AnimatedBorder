@@ -25,9 +25,20 @@ body {
   width: 80%;
   height: 80%;
 
-  display: flex; /* Change display property to flex */
+  display: flex;
   flex-direction: column;
   gap: 50px;
+  align-items: center;
+  text-align: center;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+
+  justify-content: center;
   align-items: center;
   text-align: center;
 }

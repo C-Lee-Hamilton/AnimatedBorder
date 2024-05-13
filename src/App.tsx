@@ -1,7 +1,7 @@
 import "./styles.css";
 import React,{useState,useEffect} from 'react';
 import { LightBorder,LightButton,LightSlider,
-  LightText,LightLoadbar,LightInput } from "./components/LightBorder";
+  LightText,LightLoadbar,LightInput, LightCheck, LightRadio } from "./components/LightBorder";
 
 
 export default function App(): JSX.Element {
@@ -46,7 +46,18 @@ return (
       $borderWidth={5}
       $rounded={true}
       onClick={()=>console.log("it worked again")}
-      >tester</LightButton>
+      >Solid</LightButton>
+
+      <LightButton
+      $outline={true}
+      $color1="cyan"
+      $color2="magenta"
+      $color3="cyan"
+      $fontsize=""
+      $borderWidth={5}
+      $rounded={true}
+      onClick={()=>console.log("it worked again")}
+      >Outline</LightButton>
       
       <LightSlider
       $roundedSelector={true}
@@ -68,7 +79,16 @@ return (
       $loadValue={loadVal}
       />
 
-      <LightInput $rounded={true}/>
+      <LightInput type="text" $rounded={true}/>
+
+      <div className="input-row">
+      <LightCheck $rounded={true}/>
+      <LightCheck $rounded={true}/>
+      <LightRadio $rounded={true}/>
+      <LightRadio $rounded={true}/>
+      
+      </div>
+
       </div>
     </LightBorder>
   </div>

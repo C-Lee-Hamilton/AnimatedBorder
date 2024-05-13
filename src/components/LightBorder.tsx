@@ -24,6 +24,8 @@ interface DivProps {
 interface ButtonProps{
   onClick?: () => void;
   $margin?:string;
+  $outline?:boolean;
+
 }
 
 interface SliderProps{
@@ -43,6 +45,9 @@ interface InputProps{
   type?:string,
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; 
   value?:string,
+  checked?:boolean,
+  onClick?: () => void;
+  $checkedColor?:string;
 }
 
 const DivContainer = styled.div<LightProps>`
@@ -105,12 +110,13 @@ border-radius: ${(props)=> props.$rounded ? 10:0}px;
 
 
 `
-const ButtonContent=styled.div<LightProps> `
+const ButtonContent=styled.div<LightProps & ButtonProps> `
 justify-content:center;
 align-items:center;
 position:absolute;
 padding:10px;
 display:flex;
+color:${(props)=>props.$fontColor ?? "black"};
 z-index:1;
  top: ${(props) => props.$borderWidth ? props.$borderWidth-3:  1}px;
  bottom: ${(props) => props.$borderWidth ? props.$borderWidth-3:  1}px;
@@ -119,9 +125,77 @@ z-index:1;
  
  border-radius: ${(props) =>
   props.$rounded ? 5 : 0}px;
-
-background-color: ${(props) => props.$contentColor ?? "black"};
-
+  -webkit-background-clip: ${(props)=>props.$outline ? "text" : "default"};
+  -webkit-text-fill-color: ${(props)=>props.$outline ? "transparent" : "solid" };
+  animation: ColorButtonText ${(props) => props.$speed ?? "1.25s"} infinite linear;
+  @keyframes ColorButtonText {
+    
+    0% {
+      background-image: linear-gradient(
+        to right,
+        var(--color1),
+        var(--color2),
+        var(--color2),
+        var(--color3),
+        var(--color3),
+        var(--color1)
+      );
+    }
+    20% {
+      background-image: linear-gradient(
+        to right,
+        var(--color1),
+        var(--color1),
+        var(--color2),
+        var(--color2),
+        var(--color3),
+        var(--color3)
+      );
+    }
+    40% {
+      background-image: linear-gradient(
+        to right,
+        var(--color3),
+        var(--color1),
+        var(--color1),
+        var(--color2),
+        var(--color2),
+        var(--color3)
+      );
+    }
+    60% {
+      background-image: linear-gradient(
+        to right,
+        var(--color3),
+        var(--color3),
+        var(--color1),
+        var(--color1),
+        var(--color2),
+        var(--color2)
+      );
+    }
+    80% {
+      background-image: linear-gradient(
+        to right,
+        var(--color2),
+        var(--color3),
+        var(--color3),
+        var(--color1),
+        var(--color1),
+        var(--color2)
+      );
+    }
+    100% {
+      background-image: linear-gradient(
+        to right,
+        var(--color2),
+        var(--color2),
+        var(--color3),
+        var(--color3),
+        var(--color1),
+        var(--color1)
+      );
+    }
 
 `
 
@@ -630,6 +704,191 @@ animation: ColorInput ${(props) => props.$speed ?? "2s"} infinite linear;
 
 `
 
+const Checkbox = styled.label<LightProps & InputProps>`
+  display: flex;
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+  cursor: pointer;
+  font-size: 22px;
+ 
+  
+  
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    margin:0px;
+    
+  }
+
+  .checkmark {
+    position: relative;
+    
+    transform:translateX(0%);
+    
+    height: ${(props)=>props.$height ?? "50px"};
+    width: ${(props)=>props.$height ?? "50px"};
+   
+    background-color: ${(props)=>props.$contentColor ?? "black"};
+    
+  }
+
+  &:hover input ~ .checkmark {
+    filter: grayscale(10%);
+    
+  }
+
+  input:checked ~ .checkmark {
+    background-color:${(props)=>props.$checkedColor?? "black"};
+
+  }
+
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  
+    
+  }
+
+ 
+  input:checked ~ .checkmark:after {
+    display: block;
+  
+   
+  }
+
+
+  .checkmark:after {
+    
+    left: 25%;
+    top: 25%;
+    width: 50%;
+    height: 30%;
+    border: solid var(--color1);
+    border-width: 3px 3px 0 0;
+    transform: rotate(135deg);
+    animation: ColorCheck ${(props) => props.$speed ?? "2s"} infinite linear;
+  }
+
+  @keyframes ColorCheck {
+    
+    0% {
+      border: solid var(--color1);
+      border-width:  3px 3px 0 0;
+     
+    }
+    50% {
+     
+      border: solid var(--color2);
+      border-width: 3px 3px 0 0;
+      );
+    }
+    100% {
+     
+      border: solid var(--color3);
+      border-width:  3px 3px 0 0;
+    );
+  }
+    
+
+
+
+`;
+const Radio = styled.label<LightProps & InputProps>`
+
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  font-size: 0px;
+  user-select: none;
+
+ 
+  
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+   
+  }
+
+ 
+  .checkmark {
+    position: relative;
+    display: flex;
+    padding:0px;
+    margin:0px;
+    height: ${(props)=>props.$height ?? "50px"};
+    width: ${(props)=>props.$width ?? "50px"};
+   
+    animation: Colorwheel ${(props) => props.$speed ?? "1s"} infinite linear;
+    border-radius: 50%;
+  
+    
+  }
+
+ .uncheckmark{
+  display: flex;
+  position:absolute;
+  top:7%;
+  left:7%;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  border:2px black solid;
+  background: white;
+ }
+  &:hover input ~ .checkmark {
+    filter:grayscale(20%);
+  }
+
+  
+  input:checked ~ .checkmark {
+    background-color: orange;
+  }
+  input:checked ~ .uncheckmark{
+    display:none;
+  }
+  .checkmark:after {
+    content: "";
+    position: relative;
+    display: none; 
+  }
+
+  input:checked ~ .checkmark:after {
+    display: flex;
+    margin:auto;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    border:3px white solid;
+    background: black;
+  }
+
+  
+  @keyframes Colorwheel {
+    
+    0% {
+      background-image: conic-gradient(var(--color1), var(--color2), var(--color3),var(--color1), var(--color2), var(--color3));
+
+    }
+    50% {
+      background-image: conic-gradient(var(--color3), var(--color1), var(--color2),var(--color3), var(--color1), var(--color2));
+    }
+    100% {
+      background-image: conic-gradient(var(--color2), var(--color3), var(--color1),var(--color2), var(--color3), var(--color1));
+    }
+
+`;
+
+
+
+
+
+
 
 const Top = styled.div<LightProps>`
   position: absolute;
@@ -1081,3 +1340,44 @@ export const LightInput: React.FC<LightProps & InputProps > = ({
     
    );
  };
+
+export const LightCheck: React.FC<LightProps & InputProps > = ({
+  
+  ...props
+}) => {
+  const cssVariables = {
+    '--color1': props.$color1 ?? "hotpink",
+    '--color2': props.$color2 ?? "cyan",
+    '--color3': props.$color3 ?? "lime"
+  } as React.CSSProperties
+  return(
+<Checkbox  style={cssVariables} {...props}>
+  <input  {...props} checked={props.checked} onClick={props.onClick}type="checkbox"/>
+  <span  {...props} className="checkmark">
+  <Top  {...props}/>
+  <Bottom  {...props}/>
+  <Left  {...props}/>
+  <Right  {...props}/>
+  </span>
+</Checkbox>
+  );
+};
+
+export const LightRadio: React.FC<LightProps & InputProps > = ({
+  
+  ...props
+}) => {
+  const cssVariables = {
+    '--color1': props.$color1 ?? "hotpink",
+    '--color2': props.$color2 ?? "cyan",
+    '--color3': props.$color3 ?? "lime"
+  } as React.CSSProperties
+  return(
+<Radio  style={cssVariables} {...props}>
+  <input  {...props} checked={props.checked} onClick={props.onClick}type="checkbox"/>
+  <span  {...props} className="checkmark"></span>
+  <span  {...props} className="uncheckmark"></span>
+</Radio>
+  );
+};
+
