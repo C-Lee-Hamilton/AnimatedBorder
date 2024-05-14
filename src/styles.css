@@ -2,7 +2,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow: visible;
 }
 body {
   background-color: white;
@@ -18,27 +17,131 @@ body {
   width: 100vw;
   margin: 0;
   padding: 0px;
-  background-color: black;
+  background-color: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .showcaseCol {
-  width: 80%;
-  height: 80%;
-
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: scroll;
+  padding: 0px;
+  background-color: black;
+  border-left: inset 15px #36454f;
+  border-right: outset 15px #36454f;
+  border-top: outset 15px #36454f;
+  border-bottom: inset 15px #36454f;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 20px;
   align-items: center;
   text-align: center;
 }
 
 .input-row {
   display: flex;
+  margin: 10px;
+  height: 10%;
   flex-direction: row;
-  gap: 10px;
-  width: 100%;
-
-  justify-content: center;
+  gap: 0%;
+  width: 90%;
+  position: relative;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
+}
+.showcaseColInside {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: scroll;
+  padding: 0px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  animation: MetalGround 1s infinite linear;
+}
+.header {
+  font-size: x-large;
+  box-shadow: 4px 4px 15px 15px black;
+  border-radius: 5%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.text-bg {
+  background-color: black;
+  border-radius: 5%;
+  margin: 20px 0 20px 0;
+}
+@keyframes MetalGround {
+  0% {
+    background-image: conic-gradient(
+      #686868,
+      #3b3d40,
+      #7d7c7c,
+      #3b3d40,
+      #b6b6b6,
+      #3b3d40,
+      #686868,
+      #3b3d40,
+      #7d7c7c,
+      #3b3d40,
+      #b6b6b6,
+      #3b3d40
+    );
+  }
+  25% {
+    background-image: conic-gradient(
+      #b6b6b6,
+      #3b3d40,
+      #686868,
+      #3b3d40,
+      #7d7c7c,
+      #3b3d40,
+      #b6b6b6,
+      #3b3d40,
+      #686868,
+      #3b3d40,
+      #7d7c7c,
+      #3b3d40
+    );
+  }
+
+  75% {
+    background-image: conic-gradient(
+      #7d7c7c,
+      #3b3d40,
+      #b6b6b6,
+      #3b3d40,
+      #686868,
+      #3b3d40,
+      #7d7c7c,
+      #3b3d40,
+      #b6b6b6,
+      #3b3d40,
+      #686868,
+      #3b3d40
+    );
+  }
+  100% {
+    background-image: conic-gradient(
+      #686868,
+      #3b3d40,
+      #7d7c7c,
+      #3b3d40,
+      #b6b6b6,
+      #3b3d40,
+      #686868,
+      #3b3d40,
+      #7d7c7c,
+      #3b3d40,
+      #b6b6b6,
+      #3b3d40
+    );
+  }
 }

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode,useState } from "react";
 import styled from "styled-components";
 
 interface LightProps{
@@ -19,6 +19,7 @@ interface LightProps{
 interface DivProps {
   $contentAlignX?:string;
   $contentAlignY?:string;
+  $insetBorderWidth?:number;
 }
 
 interface ButtonProps{
@@ -49,25 +50,31 @@ interface InputProps{
   onClick?: () => void;
   $checkedColor?:string;
 }
-
+interface SelectProps {
+  $options: string[];
+  $setState?: (value:string) => void;
+}
 const DivContainer = styled.div<LightProps>`
   
-  position: relative;
-  
+  position: absolute;
+ 
   
   height: ${(props) => props.$height ?? "100%"};
   width: ${(props) => props.$width ?? "100%"};
 `;
-const DivContent = styled.div<LightProps>`
-  position: absolute;
- padding:0px;
-  top: ${(props) => props.$borderWidth ? props.$borderWidth-2:  8}px;
-  bottom: ${(props) => props.$borderWidth ? props.$borderWidth-2:  8}px;
-  left: ${(props) => props.$borderWidth ? props.$borderWidth-2:  8}px;
-  right: ${(props) => props.$borderWidth ? props.$borderWidth-2:  8}px;
-  z-index: 2;
+const DivContent = styled.div<LightProps &DivProps>`
+  position:absolute;
+  display:flex;
+  // justify-content:center;
+  // align-items:center;
+  
+border:none;
+  top: ${(props) => props.$borderWidth? props.$insetBorderWidth ? props.$borderWidth*2-1:props.$borderWidth-2:8}px;
+  bottom: ${(props) => props.$borderWidth? props.$insetBorderWidth ? props.$borderWidth*2:props.$borderWidth-2:8}px;
+  left: ${(props) => props.$borderWidth? props.$insetBorderWidth ? props.$borderWidth*2-1:props.$borderWidth-2:8}px;
+  right:  ${(props) => props.$borderWidth? props.$insetBorderWidth ? props.$borderWidth*2:props.$borderWidth-2:8}px;
+  z-index: 3;
 
-  border: ${(props) => props.$contentColor ?? "black"} 1px solid;
   border-radius: ${(props) =>
     props.$rounded ? 5 : 0}px;
   background-color: ${(props) => props.$contentColor ?? "black"};
@@ -75,7 +82,10 @@ const DivContent = styled.div<LightProps>`
 const DivCenter=styled.div<DivProps>`
 height:100%;
 width:100%;
-margin:auto;
+
+z-index:3;
+position:relative;
+
 justify-content: ${(props)=>props.$contentAlignX ?? "none"};
 align-items:${(props)=>props.$contentAlignY ?? "none"} ;
 display: flex;
@@ -205,7 +215,7 @@ width: ${(props)=>props.$width ?? "300px"};
 height: ${(props)=>props.$height ?? "20px"};
 padding:2px;
 position:relative;
-border-radius: ${(props)=>props.$roundedSelector ? "100px" : "0px"};
+border-radius: ${(props)=>props.$rounded ? "100px" : "0px"};
 
 animation: ColorSlide ${(props) => props.$speed ?? "1s"} infinite linear;
   @keyframes ColorSlide {
@@ -281,7 +291,7 @@ const Slider=styled.input<LightProps & SliderProps>`
 -webkit-appearance:none;
 appearance: none;
 margin:1px;
-border-radius: ${(props)=>props.$roundedSelector ? "100px" : "0px"};
+border-radius: ${(props)=>props.$rounded ? "100px" : "0px"};
 
 width: 99%;
 height: 85%;
@@ -295,20 +305,24 @@ cursor: pointer;
  @keyframes ColorSlideSelect {
     
   0% {
-    background-image: radial-gradient(var(--color1), black, var(--color2), black, var(--color3),var(--color3),var(--color3));
+    background-image:conic-gradient(var(--color1),black,var(--color2),black,var(--color3),black);
+    border:2px ridge var(--color2);
 
 
   }
   50% {
-    background-image: radial-gradient(var(--color3), black, var(--color1), black, var(--color2),var(--color2),var(--color2));
-
+    background-image:conic-gradient(var(--color3),black,var(--color1),black,var(--color2),black);
+    border:2px ridge var(--color1);
   }
 
   
   100% {
-    background-image: radial-gradient(var(--color2), black, var(--color3), black, var(--color1),var(--color1),var(--color1));
+    background-image:conic-gradient(var(--color2),black,var(--color3),black,var(--color1),black);
+    border:2px ridge var(--color3);
+  }
+  
 
-  }}
+}
 
 &::-webkit-slider-thumb {
  
@@ -319,9 +333,8 @@ cursor: pointer;
   width:3em;
   border: none;
   border-radius: ${(props)=>props.$roundedSelector ? "100px" : "0px"};
-  background-image: radial-gradient(var(--color1), black, var(--color2), black, var(--color3),var(--color3),var(--color3));
-
-  animation: ColorSlideSelect 5s infinite linear;
+  background-image:conic-gradient(var(--color1),black,var(--color2),black,var(--color3),black);
+  animation: ColorSlideSelect 1s infinite linear;
   
 
 }
@@ -331,9 +344,10 @@ cursor: pointer;
   background-clip: content-box, border-box;
   height:3em;
   width:3em;
-  border:none;
   border-radius: ${(props)=>props.$roundedSelector ? "100px" : "0px"};
-  animation: ColorSlideSelect 5s infinite reverse;
+  animation: ColorSlideSelect 1s infinite reverse;
+ 
+
 }
 
 
@@ -346,11 +360,11 @@ position:relative;
 margin:0px;
 
 `
-const TextContent=styled.button<LightProps>`
+const TextContent=styled.button<LightProps & ButtonProps>`
 border:none;
 cursor:default;
 padding:0px;
-margin:0px;
+margin:${(props)=>props.$margin ?? "0px"};
 position:relative;
 font-size:${(props)=>props.$fontsize ?? "25px"};
 -webkit-background-clip: text;
@@ -597,9 +611,9 @@ animation: ColorLoad ${(props) => props.$speed ?? "1s"} infinite linear;
 `
 
 const InputContainer=styled.div<LightProps & InputProps>`
-height: ${(props) => props.$height ?? "40px"};
-width: ${(props) => props.$width ?? "200px"};
-
+min-height: ${(props) => props.$height ?? "40px"};
+min-width: ${(props) => props.$width ?? "200px"};
+background-color:${(props) => props.$contentColor ?? "black"};
 
 padding:0px;
   position: relative;
@@ -812,7 +826,7 @@ const Radio = styled.label<LightProps & InputProps>`
     position: absolute;
     opacity: 0;
     cursor: pointer;
-   
+
   }
 
  
@@ -825,7 +839,8 @@ const Radio = styled.label<LightProps & InputProps>`
     width: ${(props)=>props.$width ?? "50px"};
    
     animation: Colorwheel ${(props) => props.$speed ?? "1s"} infinite linear;
-    border-radius: 50%;
+    border-radius: ${(props) =>!props.$rounded  ? 0: 100}px;
+
   
     
   }
@@ -837,9 +852,11 @@ const Radio = styled.label<LightProps & InputProps>`
   left:7%;
   width: 80%;
   height: 80%;
-  border-radius: 50%;
+  // border-radius: 50%;
   border:2px black solid;
   background: white;
+  border-radius: ${(props) =>!props.$rounded  ? 0: 100}px;
+
  }
   &:hover input ~ .checkmark {
     filter:grayscale(20%);
@@ -863,7 +880,7 @@ const Radio = styled.label<LightProps & InputProps>`
     margin:auto;
     width: 50%;
     height: 50%;
-    border-radius: 50%;
+    border-radius: ${(props) =>!props.$rounded  ? 0: 100}px;
     border:3px white solid;
     background: black;
   }
@@ -884,8 +901,21 @@ const Radio = styled.label<LightProps & InputProps>`
 
 `;
 
+const SelectContainer= styled.div<LightProps>`
 
-
+`
+const SelectButton= styled.button<LightProps>`
+height:25px;
+width:100px;
+`
+const SelectDropdown= styled.div<LightProps>`
+height:100px;
+width:90px;
+`
+const SelectOption= styled.button<LightProps>`
+height:25px;
+width:90px;
+`
 
 
 
@@ -895,6 +925,7 @@ const Top = styled.div<LightProps>`
   top: 0;
   left: 0;
   right: 0;
+  
   height: ${(props) => props.$borderWidth ?? 4}px;
   border-radius: ${(props) => props.$rounded  ? 100: 0}px
     ${(props) => props.$rounded ? 100: 0}px 0 0;
@@ -1210,11 +1241,13 @@ export const LightBorder: React.FC<{ children: ReactNode } & LightProps & DivPro
 
   return (
     <DivContainer {...props} style={cssVariables}>
+      <DivContent {...props}><DivCenter {...props}>{children}</DivCenter></DivContent>
       <Top {...props} />
       <Left {...props} />
-      <DivContent {...props}><DivCenter {...props}>{children}</DivCenter></DivContent>
+      
       <Right {...props} />
       <Bottom {...props} />
+      
     </DivContainer>
   );
 };
@@ -1263,15 +1296,17 @@ export const LightSlider: React.FC< LightProps & SliderProps > = ({
 
    return (
     <SliderContainer  style={cssVariables} {...props}>
-      <Slider type="range" onChange={props.onChange}value={props.value}step={props.step} min={props.min} max={props.max} {...props}></Slider>
- 
+      <Slider type="range" onChange={props.onChange}value={props.value}step={props.step} min={props.min} max={props.max} {...props}>
+
+        
+      </Slider>
    
    </SliderContainer>
     
    );
 };
 
-export const LightText: React.FC< { children: ReactNode } & LightProps > = ({
+export const LightText: React.FC< { children: ReactNode } & LightProps &ButtonProps > = ({
   children,
   ...props
 }) => {
@@ -1342,18 +1377,17 @@ export const LightInput: React.FC<LightProps & InputProps > = ({
  };
 
 export const LightCheck: React.FC<LightProps & InputProps > = ({
-  
   ...props
 }) => {
   const cssVariables = {
     '--color1': props.$color1 ?? "hotpink",
     '--color2': props.$color2 ?? "cyan",
-    '--color3': props.$color3 ?? "lime"
+    '--color3': props.$color3 ?? "lime",
   } as React.CSSProperties
   return(
 <Checkbox  style={cssVariables} {...props}>
-  <input  {...props} checked={props.checked} onClick={props.onClick}type="checkbox"/>
-  <span  {...props} className="checkmark">
+  <input   checked={props.checked} onClick={props.onClick}type="checkbox"/>
+  <span  className="checkmark">
   <Top  {...props}/>
   <Bottom  {...props}/>
   <Left  {...props}/>
@@ -1374,10 +1408,44 @@ export const LightRadio: React.FC<LightProps & InputProps > = ({
   } as React.CSSProperties
   return(
 <Radio  style={cssVariables} {...props}>
-  <input  {...props} checked={props.checked} onClick={props.onClick}type="checkbox"/>
-  <span  {...props} className="checkmark"></span>
-  <span  {...props} className="uncheckmark"></span>
+  <input  checked={props.checked} onClick={props.onClick}type="checkbox"/>
+  <span  className="checkmark"></span>
+  <span   className="uncheckmark"></span>
 </Radio>
   );
 };
 
+export const LightSelect: React.FC<   LightProps & SelectProps > = ({
+  
+  ...props
+}) => {
+  const cssVariables = {
+    '--color1': props.$color1 ?? "hotpink",
+    '--color2': props.$color2 ?? "cyan",
+    '--color3': props.$color3 ?? "lime"
+  } as React.CSSProperties
+const selectArray=props.$options;
+const [val,setVal]=useState<string>("select")
+const [active,setActive]=useState<boolean>(false);
+const selectClick=(e:any)=>{
+  setVal(e.currentTarget.name);
+  props.$setState && props.$setState(e.currentTarget.name);
+};
+  return (
+  
+    <SelectContainer style={cssVariables} {...props}>
+      <SelectButton onClick={()=>setActive(!active)}>{val}</SelectButton>
+      <SelectDropdown onClick={()=>setActive(!active)}  style={{visibility:`${active ? "visible": "hidden"}`}}>
+      {selectArray.map((option) => (
+          <SelectOption key={option} name={option} onClick={(e)=>selectClick(e)}>
+            {option}
+          </SelectOption>
+        ))}
+      
+      </SelectDropdown>
+      
+      </SelectContainer>
+  
+   
+  );
+};
