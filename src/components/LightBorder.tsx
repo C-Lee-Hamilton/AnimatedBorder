@@ -14,6 +14,7 @@ interface LightProps{
   $fontsize?:string;
   $fontColor?:string;
   $textAlign?:string;
+  $outline?:boolean;
 }
 
 interface DivProps {
@@ -23,9 +24,9 @@ interface DivProps {
 }
 
 interface ButtonProps{
-  onClick?: () => void;
+  onClick?: (event:any) => void;
   $margin?:string;
-  $outline?:boolean;
+  
 
 }
 
@@ -51,8 +52,10 @@ interface InputProps{
   $checkedColor?:string;
 }
 interface SelectProps {
-  $options: string[];
+  $options?: string[];
   $setState?: (value:string) => void;
+  $selectsToRight?:boolean;
+  $maxDropHeight?:string;
 }
 const DivContainer = styled.div<LightProps>`
   
@@ -126,7 +129,7 @@ align-items:center;
 position:absolute;
 padding:10px;
 display:flex;
-color:${(props)=>props.$fontColor ?? "black"};
+
 z-index:1;
  top: ${(props) => props.$borderWidth ? props.$borderWidth-3:  1}px;
  bottom: ${(props) => props.$borderWidth ? props.$borderWidth-3:  1}px;
@@ -135,6 +138,7 @@ z-index:1;
  
  border-radius: ${(props) =>
   props.$rounded ? 5 : 0}px;
+  color:${(props)=>props.$fontColor ?? "black"};
   -webkit-background-clip: ${(props)=>props.$outline ? "text" : "default"};
   -webkit-text-fill-color: ${(props)=>props.$outline ? "transparent" : "solid" };
   animation: ColorButtonText ${(props) => props.$speed ?? "1.25s"} infinite linear;
@@ -614,6 +618,7 @@ const InputContainer=styled.div<LightProps & InputProps>`
 min-height: ${(props) => props.$height ?? "40px"};
 min-width: ${(props) => props.$width ?? "200px"};
 background-color:${(props) => props.$contentColor ?? "black"};
+border-radius: ${(props)=> props.$rounded ? 10:0}px;
 
 padding:0px;
   position: relative;
@@ -625,7 +630,7 @@ const InputBorder=styled.div<LightProps & InputProps>`
 height:100%;
 z-index:1;
 margin:0px;
-padding:1px;
+padding:0px;
 width:100%;
 justify-content:center;
 align-items:center;
@@ -902,21 +907,224 @@ const Radio = styled.label<LightProps & InputProps>`
 `;
 
 const SelectContainer= styled.div<LightProps>`
+width:${(props)=>props.$width ?? "100px"};
+position:relative;
+border-radius: ${(props)=> props.$rounded ? 10:0}px;
+
+display:flex;
+flex-direction:column;
+align-items:center;
+background-color:${(props)=>props.$contentColor ?? "black"};
 
 `
-const SelectButton= styled.button<LightProps>`
-height:25px;
-width:100px;
-`
-const SelectDropdown= styled.div<LightProps>`
-height:100px;
-width:90px;
-`
-const SelectOption= styled.button<LightProps>`
-height:25px;
-width:90px;
-`
+const SelectButton= styled.button<LightProps & ButtonProps>`
+height:${(props)=>props.$height ?? "30px"};
+width:${(props)=>props.$width ?? "100px"};
+position:relative;
+border-radius: ${(props)=> props.$rounded ? 10:0}px;
 
+border:none;
+
+color:${(props)=>props.$fontColor ?? "black"};
+-webkit-background-clip: ${(props)=>props.$outline ? "text" : "default"};
+-webkit-text-fill-color: ${(props)=>props.$outline ? "transparent" : "solid" };
+animation: ColorDropButtonText ${(props) => props.$speed ?? "1.25s"} infinite linear;
+@keyframes ColorDropButtonText {
+  
+  0% {
+    background-image: linear-gradient(
+      to right,
+      var(--color1),
+      var(--color2),
+      var(--color2),
+      var(--color3),
+      var(--color3),
+      var(--color1)
+    );
+  }
+  20% {
+    background-image: linear-gradient(
+      to right,
+      var(--color1),
+      var(--color1),
+      var(--color2),
+      var(--color2),
+      var(--color3),
+      var(--color3)
+    );
+  }
+  40% {
+    background-image: linear-gradient(
+      to right,
+      var(--color3),
+      var(--color1),
+      var(--color1),
+      var(--color2),
+      var(--color2),
+      var(--color3)
+    );
+  }
+  60% {
+    background-image: linear-gradient(
+      to right,
+      var(--color3),
+      var(--color3),
+      var(--color1),
+      var(--color1),
+      var(--color2),
+      var(--color2)
+    );
+  }
+  80% {
+    background-image: linear-gradient(
+      to right,
+      var(--color2),
+      var(--color3),
+      var(--color3),
+      var(--color1),
+      var(--color1),
+      var(--color2)
+    );
+  }
+  100% {
+    background-image: linear-gradient(
+      to right,
+      var(--color2),
+      var(--color2),
+      var(--color3),
+      var(--color3),
+      var(--color1),
+      var(--color1)
+    );
+  }
+`
+const SelectDropdown= styled.div<LightProps & SelectProps>`
+margin-top:${(props)=>props.$height ?? "30px"};
+width:90%;
+
+
+position:absolute;
+margin-right:${(props)=> props.$selectsToRight ? "0%" : "10%"};
+margin-left:${(props)=> props.$selectsToRight ? "10%" : "0%"};
+animation: ColorSelectSelect 1s infinite reverse;
+@keyframes ColorSelectSelect {
+    
+  0% {
+    background-image:conic-gradient(var(--color1),var(--color2),var(--color3));
+
+
+  }
+  50% {
+    background-image:conic-gradient(var(--color3),var(--color1),var(--color2));
+  }
+
+  
+  100% {
+    background-image:conic-gradient(var(--color2),var(--color3),var(--color1));
+  }
+  
+
+}
+
+`
+const SelectDiv=styled.div<LightProps>`
+width:100%;
+background-color:${(props)=>props.$contentColor ?? "black"};
+margin-top:5px;
+
+`
+const SelectOption= styled.button<LightProps & ButtonProps>`
+height:${(props)=>props.$height ?? "30px"};
+width:100%;
+
+border-radius:0;
+padding-bottom:5px;
+color:${(props)=>props.$fontColor ?? "black"};
+-webkit-background-clip: ${(props)=>props.$outline ? "text" : "default"};
+-webkit-text-fill-color: ${(props)=>props.$outline ? "transparent" : "solid" };
+animation: ColorDropText ${(props) => props.$speed ?? "1.25s"} infinite linear;
+@keyframes ColorDropText {
+  
+  0% {
+    background-image: linear-gradient(
+      to right,
+      var(--color1),
+      var(--color2),
+      var(--color2),
+      var(--color3),
+      var(--color3),
+      var(--color1)
+    );
+  }
+  20% {
+    background-image: linear-gradient(
+      to right,
+      var(--color1),
+      var(--color1),
+      var(--color2),
+      var(--color2),
+      var(--color3),
+      var(--color3)
+    );
+  }
+  40% {
+    background-image: linear-gradient(
+      to right,
+      var(--color3),
+      var(--color1),
+      var(--color1),
+      var(--color2),
+      var(--color2),
+      var(--color3)
+    );
+  }
+  60% {
+    background-image: linear-gradient(
+      to right,
+      var(--color3),
+      var(--color3),
+      var(--color1),
+      var(--color1),
+      var(--color2),
+      var(--color2)
+    );
+  }
+  80% {
+    background-image: linear-gradient(
+      to right,
+      var(--color2),
+      var(--color3),
+      var(--color3),
+      var(--color1),
+      var(--color1),
+      var(--color2)
+    );
+  }
+  100% {
+    background-image: linear-gradient(
+      to right,
+      var(--color2),
+      var(--color2),
+      var(--color3),
+      var(--color3),
+      var(--color1),
+      var(--color1)
+    );
+  }
+
+
+
+
+
+`
+const SelectScroll=styled.div<LightProps & SelectProps>`
+width:100%;
+max-height:${(props)=>props.$maxDropHeight ?? "250px"};
+overflow:scroll;
+
+margin-top:0px;
+
+`
 
 
 
@@ -1415,7 +1623,7 @@ export const LightRadio: React.FC<LightProps & InputProps > = ({
   );
 };
 
-export const LightSelect: React.FC<   LightProps & SelectProps > = ({
+export const LightSelect: React.FC<   LightProps & SelectProps & ButtonProps > = ({
   
   ...props
 }) => {
@@ -1424,24 +1632,31 @@ export const LightSelect: React.FC<   LightProps & SelectProps > = ({
     '--color2': props.$color2 ?? "cyan",
     '--color3': props.$color3 ?? "lime"
   } as React.CSSProperties
-const selectArray=props.$options;
+const selectArray:string[]=props.$options || [];
 const [val,setVal]=useState<string>("select")
 const [active,setActive]=useState<boolean>(false);
-const selectClick=(e:any)=>{
+const selectClick= (e: React.MouseEvent<HTMLButtonElement>) =>{
   setVal(e.currentTarget.name);
   props.$setState && props.$setState(e.currentTarget.name);
 };
   return (
   
     <SelectContainer style={cssVariables} {...props}>
-      <SelectButton onClick={()=>setActive(!active)}>{val}</SelectButton>
-      <SelectDropdown onClick={()=>setActive(!active)}  style={{visibility:`${active ? "visible": "hidden"}`}}>
-      {selectArray.map((option) => (
-          <SelectOption key={option} name={option} onClick={(e)=>selectClick(e)}>
-            {option}
-          </SelectOption>
-        ))}
+      <SelectButton {...props} onClick={()=>setActive(!active)}>{val}  <Top {...props}/><Bottom {...props}/><Right {...props}/><Left {...props}/></SelectButton>
       
+      <SelectDropdown {...props} onClick={()=>setActive(!active)}  style={{visibility:`${active ? "visible": "hidden"}`}}>
+      <Bottom/><Right/><Left/>
+      <SelectScroll >
+      {selectArray.map((option) => (
+        <SelectDiv>
+          <SelectOption {...props} key={option} name={option} onClick={(e:any)=>selectClick(e)}>
+           
+            {option}
+         
+          </SelectOption>
+        </SelectDiv>
+        ))}
+      </SelectScroll>
       </SelectDropdown>
       
       </SelectContainer>

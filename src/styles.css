@@ -45,12 +45,19 @@ body {
   margin: 10px;
   height: 10%;
   flex-direction: row;
-  gap: 0%;
+  gap: 10px;
   width: 90%;
   position: relative;
-  justify-content: space-around;
+  justify-content:space-around;
+
   align-items: center;
   text-align: center;
+  box-shadow: 0px 4px 15px 10px black;
+  border-radius: 5px;
+  border-left: inset 15px #36454f;
+  border-right: outset 15px #36454f;
+  border-top: outset 15px #36454f;
+  border-bottom: inset 15px #36454f;
 }
 .showcaseColInside {
   width: 100%;
@@ -61,87 +68,40 @@ body {
   background-color: black;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   align-items: center;
   text-align: center;
   animation: MetalGround 1s infinite linear;
 }
 .header {
   font-size: x-large;
-  box-shadow: 4px 4px 15px 15px black;
-  border-radius: 5%;
+  box-shadow: 0px 4px 15px 10px black;
+  border-radius: 5px;
   padding-left: 10px;
   padding-right: 10px;
 }
 .text-bg {
   background-color: black;
-  border-radius: 5%;
+  box-shadow: 0px 4px 15px 10px black;
+  border-radius: 5px;
+  border-left: inset 15px #36454f;
+  border-right: outset 15px #36454f;
+  border-top: outset 15px #36454f;
+  border-bottom: inset 15px #36454f;
   margin: 20px 0 20px 0;
 }
 @keyframes MetalGround {
   0% {
-    background-image: conic-gradient(
-      #686868,
-      #3b3d40,
-      #7d7c7c,
-      #3b3d40,
-      #b6b6b6,
-      #3b3d40,
-      #686868,
-      #3b3d40,
-      #7d7c7c,
-      #3b3d40,
-      #b6b6b6,
-      #3b3d40
-    );
+    background-image: linear-gradient(to right, #686868, #7d7c7c, #b6b6b6);
   }
   25% {
-    background-image: conic-gradient(
-      #b6b6b6,
-      #3b3d40,
-      #686868,
-      #3b3d40,
-      #7d7c7c,
-      #3b3d40,
-      #b6b6b6,
-      #3b3d40,
-      #686868,
-      #3b3d40,
-      #7d7c7c,
-      #3b3d40
-    );
+    background-image: linear-gradient(to right, #b6b6b6, #686868, #7d7c7c);
   }
 
   75% {
-    background-image: conic-gradient(
-      #7d7c7c,
-      #3b3d40,
-      #b6b6b6,
-      #3b3d40,
-      #686868,
-      #3b3d40,
-      #7d7c7c,
-      #3b3d40,
-      #b6b6b6,
-      #3b3d40,
-      #686868,
-      #3b3d40
-    );
+    background-image: linear-gradient(to right, #7d7c7c, #b6b6b6, #686868);
   }
   100% {
-    background-image: conic-gradient(
-      #686868,
-      #3b3d40,
-      #7d7c7c,
-      #3b3d40,
-      #b6b6b6,
-      #3b3d40,
-      #686868,
-      #3b3d40,
-      #7d7c7c,
-      #3b3d40,
-      #b6b6b6,
-      #3b3d40
-    );
+    background-image: linear-gradient(to right, #686868, #7d7c7c, #b6b6b6);
   }
 }

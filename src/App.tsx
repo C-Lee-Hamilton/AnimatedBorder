@@ -1,7 +1,8 @@
 import "./styles.css";
 import React,{useState,useEffect} from 'react';
 import { LightBorder,LightButton,LightSlider,
-  LightText,LightLoadbar,LightInput, LightCheck, LightRadio, LightSelect } from "./components/LightBorder";
+LightText,LightLoadbar,LightInput, LightCheck,
+LightRadio, LightSelect } from "./components/LightBorder";
 
 
 export default function App(): JSX.Element {
@@ -9,7 +10,11 @@ export default function App(): JSX.Element {
   const [sliderValue2,setSliderValue2]=useState<number>(5);
   const [loadVal,setLoadVal]=useState<number>(0);
   const [SelectVal,setSelectVal]=useState<string>("");
-  const selectOptions:string[]=["red","blue","white"];
+  const [SelectVal2,setSelectVal2]=useState<string>("");
+
+  const selectOptions:string[]=["red","blue","white","orange","yellow","green","violet","hazel","cyan"];
+  const selectOptions2:string[]=["red","blue","white","orange","yellow","green","violet","hazel","cyan"];
+
   // progress-bar
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,23 +43,25 @@ return (
     $borderWidth={10}
     $contentAlignY="center"
     $contentAlignX="center"
-   
     $color1="#686868"
     $color2="#7d7c7c"
     $color3="#b6b6b6"
+ 
     $rounded={false}>
 
     <div className="showcaseCol">
       <LightBorder
-      $color1="cyan"
-      $color2="yellow"
-      $color3="magenta"
-      $borderWidth={4}
+       $color1="cyan"
+       $color2="magenta"
+       $color3="lime"
+     
+      $borderWidth={6}
+      $rounded={true}
       >
         <div className="showcaseColInside">
         <div className="text-bg">
         <LightText
-    
+        $speed="2s"
         $color1="lime"
         $color2="cyan"
         $color3="magenta"
@@ -139,8 +146,13 @@ return (
           type="text"
           $rounded={true}
         />
-        <LightSelect $options={selectOptions} $setState={setSelectVal} />
-      
+        <LightSelect  $rounded ={true} $outline={false} $options={selectOptions} $setState={setSelectVal} />
+        <LightSelect
+        $color1="magenta"
+        $color2="violet"
+        $color3="cyan"
+        $selectsToRight={true}  $rounded ={false} $outline={true} $options={selectOptions2} $setState={setSelectVal2} />
+
         </div>
 
         </div>
