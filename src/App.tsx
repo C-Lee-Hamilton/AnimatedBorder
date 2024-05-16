@@ -2,7 +2,7 @@ import "./styles.css";
 import React,{useState,useEffect} from 'react';
 import { LightBorder,LightButton,LightSlider,
 LightText,LightLoadbar,LightInput, LightCheck,
-LightRadio, LightSelect } from "./components/LightBorder";
+LightRadio, LightSelect,LightToggle,LightInputWithSearch } from "./components/LightBorder";
 
 
 export default function App(): JSX.Element {
@@ -11,10 +11,13 @@ export default function App(): JSX.Element {
   const [loadVal,setLoadVal]=useState<number>(0);
   const [SelectVal,setSelectVal]=useState<string>("");
   const [SelectVal2,setSelectVal2]=useState<string>("");
-
+  const [toggle,setToggle]=useState<boolean>(false);
   const selectOptions:string[]=["red","blue","white","orange","yellow","green","violet","hazel","cyan"];
   const selectOptions2:string[]=["red","blue","white","orange","yellow","green","violet","hazel","cyan"];
-
+  const cleanup=()=>{
+    console.log(SelectVal,SelectVal2)
+  }
+  cleanup();
   // progress-bar
   useEffect(() => {
     const interval = setInterval(() => {
@@ -33,8 +36,9 @@ export default function App(): JSX.Element {
     const newSliderValue = parseInt(event.target.value, 10);
     setSliderValue2(newSliderValue);
   };
-
-  // #36454f"
+//toggle
+const toggleSetter=()=>{setToggle(!toggle)};
+  
 return (
   <div className="App">
     <LightBorder
@@ -112,6 +116,7 @@ return (
             step={1}
             min={0}
             max={10}
+            $height="45px"
           />
           <LightSlider
             $roundedSelector={false}
@@ -138,7 +143,7 @@ return (
             $loadValue={loadVal}
           />
         </div>
-        <div id="checkbox-radio-buttons"className="input-row">
+        <div id="text-input"className="input-row">
         <LightInput
           $color1="yellow"
           $color2="cyan"
@@ -146,6 +151,9 @@ return (
           type="text"
           $rounded={true}
         />
+        <LightInputWithSearch $solidSearchButton={false}/>
+        </div>
+        <div id="selects" className="input-row">
         <LightSelect  $rounded ={true} $outline={false} $options={selectOptions} $setState={setSelectVal} />
         <LightSelect
         $color1="magenta"
@@ -154,6 +162,19 @@ return (
         $selectsToRight={true}  $rounded ={false} $outline={true} $options={selectOptions2} $setState={setSelectVal2} />
 
         </div>
+        <div id="checkbox-radio-buttons"className="input-row">
+        <LightToggle
+        onChange={toggleSetter}
+        $rounded={true} 
+        $roundedSelector={true}
+        $width="100px" $height="50px" $slideCenterHeight="40px" $slideCenterWidth="40px" />
+        <LightToggle
+         onChange={toggleSetter}
+         $width="100px" $height="50px" $slideCenterHeight="40px" $slideCenterWidth="40px" />
+
+        </div>
+
+
 
         </div>
       </LightBorder>

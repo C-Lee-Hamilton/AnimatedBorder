@@ -37,6 +37,8 @@ interface SliderProps{
   value?:number,
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; 
   $roundedSelector?:boolean,
+  $slideCenterHeight?:string,
+  $slideCenterWidth?:string
 }
 
 interface LoadbarProps{
@@ -46,10 +48,12 @@ $loadValue?:number,
 interface InputProps{
   type?:string,
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; 
-  value?:string,
-  checked?:boolean,
+  value?:string;
+  checked?:boolean;
+  $onSubmit?: () => void;
   onClick?: () => void;
   $checkedColor?:string;
+  $solidSearchButton?:boolean;
 }
 interface SelectProps {
   $options?: string[];
@@ -57,6 +61,7 @@ interface SelectProps {
   $selectsToRight?:boolean;
   $maxDropHeight?:string;
 }
+
 const DivContainer = styled.div<LightProps>`
   
   position: absolute;
@@ -214,13 +219,15 @@ z-index:1;
 `
 
 const SliderContainer=styled.div<LightProps & SliderProps>`
+height:var(--height);
+width:var(--width);
 
-width: ${(props)=>props.$width ?? "300px"};
-height: ${(props)=>props.$height ?? "20px"};
 padding:2px;
 position:relative;
 border-radius: ${(props)=>props.$rounded ? "100px" : "0px"};
-
+display:flex;
+align-items:center;
+justify-content:center;
 animation: ColorSlide ${(props) => props.$speed ?? "1s"} infinite linear;
   @keyframes ColorSlide {
     
@@ -333,8 +340,9 @@ cursor: pointer;
   appearance: none;
   background-origin: border-box;
   background-clip: content-box, border-box;
-  height:3em;
-  width:3em;
+  height:var(--slideCenterHeight);
+  width:var(--slideCenterWidth);
+ 
   border: none;
   border-radius: ${(props)=>props.$roundedSelector ? "100px" : "0px"};
   background-image:conic-gradient(var(--color1),black,var(--color2),black,var(--color3),black);
@@ -346,8 +354,9 @@ cursor: pointer;
 &::-moz-range-thumb {
   background-origin: border-box;
   background-clip: content-box, border-box;
-  height:3em;
-  width:3em;
+  height:var(--slideCenterHeight);
+  width:var(--slideCenterWidth);
+
   border-radius: ${(props)=>props.$roundedSelector ? "100px" : "0px"};
   animation: ColorSlideSelect 1s infinite reverse;
  
@@ -622,9 +631,7 @@ border-radius: ${(props)=> props.$rounded ? 10:0}px;
 
 padding:0px;
   position: relative;
-  :hover {
-    cursor:text;
-  }
+
 `
 const InputBorder=styled.div<LightProps & InputProps>`
 height:100%;
@@ -637,6 +644,7 @@ align-items:center;
 display:flex;
 position:absolute;
 
+
 `
 const InputContent=styled.input<LightProps & InputProps>`
 width:100%;
@@ -644,9 +652,11 @@ height:80%;
 margin:0px;
 text-align:${(props)=>props.$textAlign ?? "center"};
 font-size:${(props)=>props.$fontsize ?? "1em"};
+border:none;
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 animation: ColorInput ${(props) => props.$speed ?? "2s"} infinite linear;
+cursor:text;
   @keyframes ColorInput {
     
     0% {
@@ -722,6 +732,127 @@ animation: ColorInput ${(props) => props.$speed ?? "2s"} infinite linear;
 
 
 `
+const InputSearchButton=styled.button<LightProps & InputProps>`
+height:${(props)=>props.$height ?? "40px"};
+width:${(props)=>props.$height ?? "40px"};
+
+margin-right:${(props)=>props.$borderWidth ?? 4}px;
+font-size:x-large;
+border:none;
+
+background-color:blue;
+cursor:pointer;
+
+&:hover{
+filter:brightness(80%);
+}
+&:active{
+  
+ border-right:0px solid var(--color1);
+ transform:translateX(5%) scale(95%);
+}
+
+color:${(props)=>props.$fontColor ?? "black"};
+  -webkit-background-clip: ${(props)=>!props.$solidSearchButton ? "text" : "default"};
+  -webkit-text-fill-color: ${(props)=>!props.$solidSearchButton ? "transparent" : "solid" };
+  animation: ${(props)=>props.$solidSearchButton ? "ColorButtonText2" : "ColorButtonTextOutline"} ${(props) => props.$speed ?? "1.25s"} infinite linear;
+
+
+  @keyframes ColorButtonText2 {
+    
+    0% {
+      background-image:conic-gradient(var(--color1),black,var(--color2),black,var(--color3),black);
+      border-left:2px solid var(--color1);
+  
+  
+    }
+    50% {
+      background-image:conic-gradient(var(--color3),black,var(--color1),black,var(--color2),black);
+      border-left:2px solid var(--color2);    }
+  
+    
+    100% {
+      background-image:conic-gradient(var(--color2),black,var(--color3),black,var(--color1),black);
+      border-left:2px solid var(--color3);
+    }
+  }
+
+    @keyframes ColorButtonTextOutline {
+    
+      0% {
+        border-left:2px solid var(--color1);
+        background-image: linear-gradient(
+          to right,
+          var(--color1),
+          var(--color2),
+          var(--color2),
+          var(--color3),
+          var(--color3),
+          var(--color1)
+        );
+      }
+      20% {
+        background-image: linear-gradient(
+          to right,
+          var(--color1),
+          var(--color1),
+          var(--color2),
+          var(--color2),
+          var(--color3),
+          var(--color3)
+        );
+      }
+      40% {
+        background-image: linear-gradient(
+          to right,
+          var(--color3),
+          var(--color1),
+          var(--color1),
+          var(--color2),
+          var(--color2),
+          var(--color3)
+        );
+      }
+      50%{      border-left:2px solid var(--color2);}
+      60% {
+        background-image: linear-gradient(
+          to right,
+          var(--color3),
+          var(--color3),
+          var(--color1),
+          var(--color1),
+          var(--color2),
+          var(--color2)
+        );
+      }
+      80% {
+        background-image: linear-gradient(
+          to right,
+          var(--color2),
+          var(--color3),
+          var(--color3),
+          var(--color1),
+          var(--color1),
+          var(--color2)
+        );
+      }
+      100% {
+        border-left:2px solid var(--color3);
+        background-image: linear-gradient(
+          to right,
+          var(--color2),
+          var(--color2),
+          var(--color3),
+          var(--color3),
+          var(--color1),
+          var(--color1)
+        );
+      }
+    }
+
+
+`
+
 
 const Checkbox = styled.label<LightProps & InputProps>`
   display: flex;
@@ -910,7 +1041,7 @@ const SelectContainer= styled.div<LightProps>`
 width:${(props)=>props.$width ?? "100px"};
 position:relative;
 border-radius: ${(props)=> props.$rounded ? 10:0}px;
-
+z-index:3;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -1499,12 +1630,17 @@ export const LightSlider: React.FC< LightProps & SliderProps > = ({
    const cssVariables = {
      '--color1': props.$color1 ?? "hotpink",
      '--color2': props.$color2 ?? "cyan",
-     '--color3': props.$color3 ?? "lime"
+     '--color3': props.$color3 ?? "lime",
+     '--width' :props.$width ?? "300px",
+     '--height':props.$height ?? "20px",
+     '--slideCenterHeight':props.$slideCenterHeight ?? "3em",
+     '--slideCenterWidth':props.$slideCenterWidth ?? "3em",
+    
    } as React.CSSProperties
 
    return (
     <SliderContainer  style={cssVariables} {...props}>
-      <Slider type="range" onChange={props.onChange}value={props.value}step={props.step} min={props.min} max={props.max} {...props}>
+      <Slider style={cssVariables} type="range" onChange={props.onChange}value={props.value}step={props.step} min={props.min} max={props.max} {...props}>
 
         
       </Slider>
@@ -1582,7 +1718,39 @@ export const LightInput: React.FC<LightProps & InputProps > = ({
      
     
    );
- };
+};
+
+export const LightInputWithSearch: React.FC<LightProps & InputProps > = ({
+  
+  ...props
+}) => {
+  const cssVariables = {
+    '--color1': props.$color1 ?? "hotpink",
+    '--color2': props.$color2 ?? "cyan",
+    '--color3': props.$color3 ?? "lime"
+  } as React.CSSProperties
+
+  return (
+    
+    <InputContainer {...props} style={cssVariables}>
+     <InputBorder {...props}>
+      <InputContent type={props.type} value={props.value} onChange={props.onChange} placeholder="..."{...props}/> 
+      <InputSearchButton {...props} onClick={props.$onSubmit}>&#x1F50E;</InputSearchButton>
+      <Top {...props} />
+      <Left {...props} />
+   
+      <Right {...props} />
+      
+      <Bottom {...props} />
+     
+      </InputBorder>
+    
+    </InputContainer>
+    
+   
+  );
+};
+
 
 export const LightCheck: React.FC<LightProps & InputProps > = ({
   ...props
@@ -1661,6 +1829,32 @@ const selectClick= (e: React.MouseEvent<HTMLButtonElement>) =>{
       
       </SelectContainer>
   
+   
+  );
+};
+
+export const LightToggle: React.FC< LightProps & SliderProps > = ({
+  
+  ...props
+}) => {
+  const cssVariables = {
+    '--color1': props.$color1 ?? "hotpink",
+    '--color2': props.$color2 ?? "cyan",
+    '--color3': props.$color3 ?? "lime",
+    '--width' :props.$width ?? "50px",
+    '--height':props.$height ?? "35px",
+    '--slideCenterHeight':props.$slideCenterHeight ?? "20px",
+    '--slideCenterWidth':props.$slideCenterWidth ?? "40px",
+   
+  } as React.CSSProperties
+  const [clicked,setClicked]=useState<boolean>(false);
+  const clickFunction=()=>{setClicked(!clicked); props.onChange}
+  return (
+   <SliderContainer  style={cssVariables} {...props}>
+     <Slider style={cssVariables}onClick={clickFunction} type="range" value={clicked? 1 : 0}step={1} min={0} max={1} {...props}>
+     </Slider>
+  
+  </SliderContainer>
    
   );
 };
