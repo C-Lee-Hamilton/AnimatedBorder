@@ -1,8 +1,19 @@
 import "./styles.css";
 import React,{useState,useEffect} from 'react';
+
+import Six from "./images/0.png";
+import One from "./images/1.png";
+import Two from "./images/2.png";
+import Three from "./images/3.png";
+import Four from "./images/4.png";
+import Five from "./images/5.png";
+
+
+
 import { LightBorder,LightButton,LightSlider,
 LightText,LightLoadbar,LightInput, LightCheck,
-LightRadio, LightSelect,LightToggle,LightInputWithSearch } from "./components/LightBorder";
+LightRadio, LightSelect,LightToggle,LightInputWithSearch,
+LightSeparator,LightImage } from "./components/LightBorder";
 
 
 export default function App(): JSX.Element {
@@ -71,6 +82,7 @@ return (
         $color3="magenta"
         $fontsize="20px"><h1 className="header">Animation Gradiation Component Librarium</h1></LightText> 
         </div>  
+        <LightSeparator/>
         <div id="checkbox-radio-buttons"className="input-row">
           <LightCheck $rounded={true}/>
           <LightCheck $color1="darkorange" $color2="cyan" $color3="white" $rounded={true}/>
@@ -79,6 +91,7 @@ return (
           <LightRadio $rounded={false}/>
           <LightRadio $color1="darkorange" $color2="cyan" $color3="white" $rounded={false}/>
         </div>
+        <LightSeparator/>
         <div id="buttons" className="input-row">
           <LightButton
           $color1="cyan"
@@ -102,7 +115,7 @@ return (
           >Outline</LightButton>
           
         </div>
-
+        <LightSeparator/>
         <div id="slider-bars" className="input-row">
         
           <LightSlider
@@ -131,7 +144,7 @@ return (
             max={10}
           />
         </div>
-    
+        <LightSeparator/>
 
         <div id="progress-bars" className="input-row">
           <LightLoadbar
@@ -143,6 +156,7 @@ return (
             $loadValue={loadVal}
           />
         </div>
+        <LightSeparator/>
         <div id="text-input"className="input-row">
         <LightInput
           $color1="yellow"
@@ -153,6 +167,7 @@ return (
         />
         <LightInputWithSearch $solidSearchButton={false}/>
         </div>
+        <LightSeparator/>
         <div id="selects" className="input-row">
         <LightSelect  $rounded ={true} $outline={false} $options={selectOptions} $setState={setSelectVal} />
         <LightSelect
@@ -162,6 +177,7 @@ return (
         $selectsToRight={true}  $rounded ={false} $outline={true} $options={selectOptions2} $setState={setSelectVal2} />
 
         </div>
+        <LightSeparator/>
         <div id="checkbox-radio-buttons"className="input-row">
         <LightToggle
         onChange={toggleSetter}
@@ -173,9 +189,18 @@ return (
          $width="100px" $height="50px" $slideCenterHeight="40px" $slideCenterWidth="40px" />
 
         </div>
+        
+<LightSeparator/>
+<div id="images"className="input-row-images">
 
+<LightImage src={One}/>
+<LightImage src={Two}/>
+<LightImage src={Three}/>
+<LightImage src={Four}/>
+<LightImage src={Five}/>
+<LightImage src={Six}/>
 
-
+</div>
         </div>
       </LightBorder>
     </div>

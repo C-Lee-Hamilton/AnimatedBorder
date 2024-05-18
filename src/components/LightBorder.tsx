@@ -62,6 +62,10 @@ interface SelectProps {
   $maxDropHeight?:string;
 }
 
+interface ImageProps{
+  src?:string,
+}
+
 const DivContainer = styled.div<LightProps>`
   
   position: absolute;
@@ -1257,7 +1261,115 @@ margin-top:0px;
 
 `
 
+const Separator=styled.div<LightProps>`
+position:relative;
+min-height:${(props)=>props.$height ?? "2px"};
+min-width:${(props)=>props.$width ?? "90%"};
+border-radius:100%;
+animation: ColorSeparate ${(props) => props.$speed ?? "2s"} infinite linear;
+@keyframes ColorSeparate {
+  
+  0% {
+    background-image: linear-gradient(
+      to right,
+      var(--color1),
+      var(--color2),
+      var(--color2),
+      var(--color3),
+      var(--color3),
+      var(--color1)
+    );
+  }
+  20% {
+    background-image: linear-gradient(
+      to right,
+      var(--color1),
+      var(--color1),
+      var(--color2),
+      var(--color2),
+      var(--color3),
+      var(--color3)
+    );
+  }
+  40% {
+    background-image: linear-gradient(
+      to right,
+      var(--color3),
+      var(--color1),
+      var(--color1),
+      var(--color2),
+      var(--color2),
+      var(--color3)
+    );
+  }
+  60% {
+    background-image: linear-gradient(
+      to right,
+      var(--color3),
+      var(--color3),
+      var(--color1),
+      var(--color1),
+      var(--color2),
+      var(--color2)
+    );
+  }
+  80% {
+    background-image: linear-gradient(
+      to right,
+      var(--color2),
+      var(--color3),
+      var(--color3),
+      var(--color1),
+      var(--color1),
+      var(--color2)
+    );
+  }
+  100% {
+    background-image: linear-gradient(
+      to right,
+      var(--color2),
+      var(--color2),
+      var(--color3),
+      var(--color3),
+      var(--color1),
+      var(--color1)
+    );
+  }
+}
+}
 
+
+`
+const Image=styled.img<LightProps>`
+height: ${(props)=>props.$height ?? "50px"};
+width:  ${(props)=>props.$width?? "50px"};
+position:relative;
+
+
+filter: drop-shadow(0px -4px 3px var(--color1)) drop-shadow(0px 4px 3px var(--color1))
+  drop-shadow(0px 2px 3px var(--color2)) drop-shadow(0px -2px 3px var(--color3));
+
+  animation: ColorImage ${(props) => props.$speed ?? "2s"} infinite linear;
+
+
+  @keyframes ColorImage {
+    
+    0% {
+      filter:drop-shadow(0px -4px 3px var(--color1)) drop-shadow(0px 4px 3px var(--color1))
+      drop-shadow(0px 2px 3px var(--color2)) drop-shadow(0px -2px 3px var(--color3));
+    
+    }
+    50% {
+      filter:drop-shadow(0px -4px 3px var(--color3)) drop-shadow(0px 4px 3px var(--color3))
+      drop-shadow(0px 2px 3px var(--color1)) drop-shadow(0px -2px 3px var(--color2));
+    
+    100% {
+      filter:drop-shadow(0px -4px 3px var(--color2)) drop-shadow(0px 4px 3px var(--color2))
+      drop-shadow(0px 2px 3px var(--color3)) drop-shadow(0px -2px 3px var(--color1));
+    }
+  }
+
+`
 
 const Top = styled.div<LightProps>`
   position: absolute;
@@ -1855,6 +1967,42 @@ export const LightToggle: React.FC< LightProps & SliderProps > = ({
      </Slider>
   
   </SliderContainer>
+   
+  );
+};
+
+export const LightSeparator: React.FC< LightProps> = ({
+  
+  ...props
+}) => {
+  const cssVariables = {
+    '--color1': props.$color1 ?? "hotpink",
+    '--color2': props.$color2 ?? "cyan",
+    '--color3': props.$color3 ?? "lime",
+   
+   
+  } as React.CSSProperties
+ 
+  return (
+<Separator style={cssVariables} {...props}/>
+   
+  );
+};
+
+export const LightImage: React.FC< LightProps & ImageProps> = ({
+  
+  ...props
+}) => {
+  const cssVariables = {
+    '--color1': props.$color1 ?? "hotpink",
+    '--color2': props.$color2 ?? "cyan",
+    '--color3': props.$color3 ?? "lime",
+   
+   
+  } as React.CSSProperties
+ 
+  return (
+<Image alt=" " src={props.src}  style={cssVariables} {...props}/>
    
   );
 };

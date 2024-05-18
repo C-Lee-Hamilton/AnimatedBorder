@@ -48,7 +48,7 @@ body {
   gap: 10px;
   width: 90%;
   position: relative;
-  justify-content:space-around;
+  justify-content: space-around;
 
   align-items: center;
   text-align: center;
@@ -104,4 +104,24 @@ body {
   100% {
     background-image: linear-gradient(to right, #686868, #7d7c7c, #b6b6b6);
   }
+}
+
+.input-row-images {
+  display: flex;
+  margin: 10px;
+  min-height: 80px;
+  flex-direction: row;
+  gap: 10px;
+  width: 90%;
+  position: relative;
+  justify-content: space-around;
+
+  align-items: center;
+  text-align: center;
+  box-shadow: 0px 4px 15px 10px black;
+  border-radius: 5px;
+  border-left: inset 15px #36454f;
+  border-right: outset 15px #36454f;
+  border-top: outset 15px #36454f;
+  border-bottom: inset 15px #36454f;
 }
