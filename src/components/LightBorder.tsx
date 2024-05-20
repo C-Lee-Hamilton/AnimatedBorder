@@ -18,7 +18,9 @@ interface LightProps{
 }
 
 interface DivProps {
+  //justify content
   $contentAlignX?:string;
+  //align items
   $contentAlignY?:string;
   $insetBorderWidth?:number;
 }
@@ -26,8 +28,6 @@ interface DivProps {
 interface ButtonProps{
   onClick?: (event:any) => void;
   $margin?:string;
-  
-
 }
 
 interface SliderProps{
@@ -42,7 +42,7 @@ interface SliderProps{
 }
 
 interface LoadbarProps{
-$loadValue?:number,
+  $loadValue?:number,
 }
 
 interface InputProps{
@@ -66,6 +66,56 @@ interface ImageProps{
   src?:string,
 }
 
+//color
+const colorVar1=`
+var(--color1),
+var(--color2),
+var(--color2),
+var(--color3),
+var(--color3),
+var(--color1)`
+const colorVar2=`
+var(--color1),
+var(--color1),
+var(--color2),
+var(--color2),
+var(--color3),
+var(--color3)
+`
+const colorVar3=`
+var(--color3),
+var(--color1),
+var(--color1),
+var(--color2),
+var(--color2),
+var(--color3)
+`
+const colorVar4=`
+var(--color3),
+var(--color3),
+var(--color1),
+var(--color1),
+var(--color2),
+var(--color2)
+`
+const colorVar5=`
+var(--color2),
+var(--color3),
+var(--color3),
+var(--color1),
+var(--color1),
+var(--color2)
+`
+const colorVar6=`
+var(--color2),
+var(--color2),
+var(--color3),
+var(--color3),
+var(--color1),
+var(--color1)
+`
+
+
 const DivContainer = styled.div<LightProps>`
   
   position: absolute;
@@ -77,8 +127,7 @@ const DivContainer = styled.div<LightProps>`
 const DivContent = styled.div<LightProps &DivProps>`
   position:absolute;
   display:flex;
-  // justify-content:center;
-  // align-items:center;
+
   
 border:none;
   top: ${(props) => props.$borderWidth? props.$insetBorderWidth ? props.$borderWidth*2-1:props.$borderWidth-2:8}px;
@@ -156,67 +205,37 @@ z-index:1;
     0% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1)
+        ${colorVar1}
       );
     }
     20% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3)
+    ${colorVar2}
       );
     }
     40% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3)
+        ${colorVar3}
       );
     }
     60% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2)
+        ${colorVar4}
       );
     }
     80% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2)
+        ${colorVar5}
       );
     }
     100% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1)
+        ${colorVar6}
       );
     }
 
@@ -238,67 +257,37 @@ animation: ColorSlide ${(props) => props.$speed ?? "1s"} infinite linear;
     0% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1)
+        ${colorVar1}
       );
     }
     20% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3)
+        ${colorVar2}
       );
     }
     40% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3)
+        ${colorVar3}
       );
     }
     60% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2)
+        ${colorVar4}
       );
     }
     80% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2)
+        ${colorVar5}
       );
     }
     100% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1)
+        ${colorVar6}
       );
     }
 `
@@ -392,67 +381,37 @@ animation: ColorText ${(props) => props.$speed ?? "1s"} infinite linear;
     0% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1)
+        ${colorVar1}
       );
     }
     20% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3)
+        ${colorVar2}
       );
     }
     40% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3)
+        ${colorVar3}
       );
     }
     60% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2)
+        ${colorVar4}
       );
     }
     80% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2)
+        ${colorVar5}
       );
     }
     100% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1)
+        ${colorVar6}
       );
     }
 
@@ -475,67 +434,37 @@ animation: ColorLoad ${(props) => props.$speed ?? "1s"} infinite linear;
 0% {
   background-image: linear-gradient(
     to right,
-    var(--color1),
-    var(--color2),
-    var(--color2),
-    var(--color3),
-    var(--color3),
-    var(--color1)
+    ${colorVar1}
   );
 }
 20% {
   background-image: linear-gradient(
     to right,
-    var(--color1),
-    var(--color1),
-    var(--color2),
-    var(--color2),
-    var(--color3),
-    var(--color3)
+    ${colorVar2}
   );
 }
 40% {
   background-image: linear-gradient(
     to right,
-    var(--color3),
-    var(--color1),
-    var(--color1),
-    var(--color2),
-    var(--color2),
-    var(--color3)
+    ${colorVar3}
   );
 }
 60% {
   background-image: linear-gradient(
     to right,
-    var(--color3),
-    var(--color3),
-    var(--color1),
-    var(--color1),
-    var(--color2),
-    var(--color2)
+    ${colorVar4}
   );
 }
 80% {
   background-image: linear-gradient(
     to right,
-    var(--color2),
-    var(--color3),
-    var(--color3),
-    var(--color1),
-    var(--color1),
-    var(--color2)
+    ${colorVar5}
   );
 }
 100% {
   background-image: linear-gradient(
     to right,
-    var(--color2),
-    var(--color2),
-    var(--color3),
-    var(--color3),
-    var(--color1),
-    var(--color1)
+    ${colorVar6}
   );
 }
 `
@@ -562,67 +491,37 @@ animation: ColorLoad ${(props) => props.$speed ?? "1s"} infinite linear;
 0% {
   background-image: linear-gradient(
     to left,
-    var(--color1),
-    var(--color2),
-    var(--color2),
-    var(--color3),
-    var(--color3),
-    var(--color1)
+    ${colorVar1}
   );
 }
 20% {
   background-image: linear-gradient(
     to left,
-    var(--color1),
-    var(--color1),
-    var(--color2),
-    var(--color2),
-    var(--color3),
-    var(--color3)
+    ${colorVar2}
   );
 }
 40% {
   background-image: linear-gradient(
     to left,
-    var(--color3),
-    var(--color1),
-    var(--color1),
-    var(--color2),
-    var(--color2),
-    var(--color3)
+    ${colorVar3}
   );
 }
 60% {
   background-image: linear-gradient(
     to left,
-    var(--color3),
-    var(--color3),
-    var(--color1),
-    var(--color1),
-    var(--color2),
-    var(--color2)
+    ${colorVar4}
   );
 }
 80% {
   background-image: linear-gradient(
     to left,
-    var(--color2),
-    var(--color3),
-    var(--color3),
-    var(--color1),
-    var(--color1),
-    var(--color2)
+    ${colorVar5}
   );
 }
 100% {
   background-image: linear-gradient(
     to left,
-    var(--color2),
-    var(--color2),
-    var(--color3),
-    var(--color3),
-    var(--color1),
-    var(--color1)
+    ${colorVar6}
   );
 }
 `
@@ -666,67 +565,37 @@ cursor:text;
     0% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1)
+        ${colorVar1}
       );
     }
     20% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3)
+        ${colorVar2}
       );
     }
     40% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3)
+        ${colorVar3}
       );
     }
     60% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2)
+        ${colorVar4}
       );
     }
     80% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2)
+        ${colorVar5}
       );
     }
     100% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1)
+        ${colorVar6}
       );
     }
 
@@ -787,69 +656,39 @@ color:${(props)=>props.$fontColor ?? "black"};
         border-left:2px solid var(--color1);
         background-image: linear-gradient(
           to right,
-          var(--color1),
-          var(--color2),
-          var(--color2),
-          var(--color3),
-          var(--color3),
-          var(--color1)
+          ${colorVar1}
         );
       }
       20% {
         background-image: linear-gradient(
           to right,
-          var(--color1),
-          var(--color1),
-          var(--color2),
-          var(--color2),
-          var(--color3),
-          var(--color3)
+          ${colorVar2}
         );
       }
       40% {
         background-image: linear-gradient(
           to right,
-          var(--color3),
-          var(--color1),
-          var(--color1),
-          var(--color2),
-          var(--color2),
-          var(--color3)
+          ${colorVar3}
         );
       }
       50%{      border-left:2px solid var(--color2);}
       60% {
         background-image: linear-gradient(
           to right,
-          var(--color3),
-          var(--color3),
-          var(--color1),
-          var(--color1),
-          var(--color2),
-          var(--color2)
+          ${colorVar4}
         );
       }
       80% {
         background-image: linear-gradient(
           to right,
-          var(--color2),
-          var(--color3),
-          var(--color3),
-          var(--color1),
-          var(--color1),
-          var(--color2)
+          ${colorVar5}
         );
       }
       100% {
         border-left:2px solid var(--color3);
         background-image: linear-gradient(
           to right,
-          var(--color2),
-          var(--color2),
-          var(--color3),
-          var(--color3),
-          var(--color1),
-          var(--color1)
+          ${colorVar6}
         );
       }
     }
@@ -882,7 +721,7 @@ const Checkbox = styled.label<LightProps & InputProps>`
     position: relative;
     
     transform:translateX(0%);
-    
+    border-radius:${(props)=>props.$rounded ? "10px" : "0px"};
     height: ${(props)=>props.$height ?? "50px"};
     width: ${(props)=>props.$height ?? "50px"};
    
@@ -992,7 +831,6 @@ const Radio = styled.label<LightProps & InputProps>`
   left:7%;
   width: 80%;
   height: 80%;
-  // border-radius: 50%;
   border:2px black solid;
   background: white;
   border-radius: ${(props) =>!props.$rounded  ? 0: 100}px;
@@ -1069,67 +907,37 @@ animation: ColorDropButtonText ${(props) => props.$speed ?? "1.25s"} infinite li
   0% {
     background-image: linear-gradient(
       to right,
-      var(--color1),
-      var(--color2),
-      var(--color2),
-      var(--color3),
-      var(--color3),
-      var(--color1)
+      ${colorVar1}
     );
   }
   20% {
     background-image: linear-gradient(
       to right,
-      var(--color1),
-      var(--color1),
-      var(--color2),
-      var(--color2),
-      var(--color3),
-      var(--color3)
+      ${colorVar2}
     );
   }
   40% {
     background-image: linear-gradient(
       to right,
-      var(--color3),
-      var(--color1),
-      var(--color1),
-      var(--color2),
-      var(--color2),
-      var(--color3)
+      ${colorVar3}
     );
   }
   60% {
     background-image: linear-gradient(
       to right,
-      var(--color3),
-      var(--color3),
-      var(--color1),
-      var(--color1),
-      var(--color2),
-      var(--color2)
+      ${colorVar4}
     );
   }
   80% {
     background-image: linear-gradient(
       to right,
-      var(--color2),
-      var(--color3),
-      var(--color3),
-      var(--color1),
-      var(--color1),
-      var(--color2)
+      ${colorVar5}
     );
   }
   100% {
     background-image: linear-gradient(
       to right,
-      var(--color2),
-      var(--color2),
-      var(--color3),
-      var(--color3),
-      var(--color1),
-      var(--color1)
+      ${colorVar6}
     );
   }
 `
@@ -1183,72 +991,38 @@ animation: ColorDropText ${(props) => props.$speed ?? "1.25s"} infinite linear;
   0% {
     background-image: linear-gradient(
       to right,
-      var(--color1),
-      var(--color2),
-      var(--color2),
-      var(--color3),
-      var(--color3),
-      var(--color1)
+      ${colorVar1}
     );
   }
   20% {
     background-image: linear-gradient(
       to right,
-      var(--color1),
-      var(--color1),
-      var(--color2),
-      var(--color2),
-      var(--color3),
-      var(--color3)
+      ${colorVar2}
     );
   }
   40% {
     background-image: linear-gradient(
       to right,
-      var(--color3),
-      var(--color1),
-      var(--color1),
-      var(--color2),
-      var(--color2),
-      var(--color3)
+      ${colorVar3}
     );
   }
   60% {
     background-image: linear-gradient(
       to right,
-      var(--color3),
-      var(--color3),
-      var(--color1),
-      var(--color1),
-      var(--color2),
-      var(--color2)
+      ${colorVar4}
     );
   }
   80% {
     background-image: linear-gradient(
-      to right,
-      var(--color2),
-      var(--color3),
-      var(--color3),
-      var(--color1),
-      var(--color1),
-      var(--color2)
+      ${colorVar5}
     );
   }
   100% {
     background-image: linear-gradient(
       to right,
-      var(--color2),
-      var(--color2),
-      var(--color3),
-      var(--color3),
-      var(--color1),
-      var(--color1)
+      ${colorVar6}
     );
   }
-
-
-
 
 
 `
@@ -1272,67 +1046,37 @@ animation: ColorSeparate ${(props) => props.$speed ?? "2s"} infinite linear;
   0% {
     background-image: linear-gradient(
       to right,
-      var(--color1),
-      var(--color2),
-      var(--color2),
-      var(--color3),
-      var(--color3),
-      var(--color1)
+      ${colorVar1}
     );
   }
   20% {
     background-image: linear-gradient(
       to right,
-      var(--color1),
-      var(--color1),
-      var(--color2),
-      var(--color2),
-      var(--color3),
-      var(--color3)
+      ${colorVar2}
     );
   }
   40% {
     background-image: linear-gradient(
       to right,
-      var(--color3),
-      var(--color1),
-      var(--color1),
-      var(--color2),
-      var(--color2),
-      var(--color3)
+      ${colorVar3}
     );
   }
   60% {
     background-image: linear-gradient(
       to right,
-      var(--color3),
-      var(--color3),
-      var(--color1),
-      var(--color1),
-      var(--color2),
-      var(--color2)
+      ${colorVar4}
     );
   }
   80% {
     background-image: linear-gradient(
       to right,
-      var(--color2),
-      var(--color3),
-      var(--color3),
-      var(--color1),
-      var(--color1),
-      var(--color2)
+      ${colorVar5}
     );
   }
   100% {
     background-image: linear-gradient(
       to right,
-      var(--color2),
-      var(--color2),
-      var(--color3),
-      var(--color3),
-      var(--color1),
-      var(--color1)
+      ${colorVar6}
     );
   }
 }
@@ -1387,67 +1131,37 @@ const Top = styled.div<LightProps>`
     0% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1)
+        ${colorVar1}
       );
     }
     20% {
       background-image: linear-gradient(
         to right,
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3)
+        ${colorVar2}
       );
     }
     40% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3)
+   ${colorVar3}
       );
     }
     60% {
       background-image: linear-gradient(
         to right,
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2)
+   ${colorVar4}
       );
     }
     80% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2)
+       ${colorVar5}
       );
     }
     100% {
       background-image: linear-gradient(
         to right,
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1)
+      ${colorVar6}
       );
     }
   }
@@ -1538,62 +1252,32 @@ const Right = styled.div<LightProps>`
   @keyframes ColorRight {
     0% {
       background-image: linear-gradient(
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1)
+      ${colorVar1}
       );
     }
     20% {
       background-image: linear-gradient(
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3)
+  ${colorVar2}
       );
     }
     40% {
       background-image: linear-gradient(
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3)
+    ${colorVar3}
       );
     }
     60% {
       background-image: linear-gradient(
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2)
+        ${colorVar4}
       );
     }
     80% {
       background-image: linear-gradient(
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2)
+        ${colorVar5}
       );
     }
     100% {
       background-image: linear-gradient(
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1)
+        ${colorVar6}
       );
     }
   }
@@ -1611,67 +1295,37 @@ const Bottom = styled.div<LightProps>`
     0% {
       background-image: linear-gradient(
         to left,
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1)
+       ${colorVar1}
       );
     }
     20% {
       background-image: linear-gradient(
         to left,
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3)
+        ${colorVar2}
       );
     }
     40% {
       background-image: linear-gradient(
         to left,
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2),
-        var(--color3)
+        ${colorVar3}
       );
     }
     60% {
       background-image: linear-gradient(
         to left,
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2),
-        var(--color2)
+        ${colorVar4}
       );
     }
     80% {
       background-image: linear-gradient(
         to left,
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1),
-        var(--color2)
+        ${colorVar5}
       );
     }
     100% {
       background-image: linear-gradient(
         to left,
-        var(--color2),
-        var(--color2),
-        var(--color3),
-        var(--color3),
-        var(--color1),
-        var(--color1)
+        ${colorVar6}
       );
     }
   }
@@ -1862,7 +1516,6 @@ export const LightInputWithSearch: React.FC<LightProps & InputProps > = ({
    
   );
 };
-
 
 export const LightCheck: React.FC<LightProps & InputProps > = ({
   ...props
