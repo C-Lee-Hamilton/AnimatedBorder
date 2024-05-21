@@ -896,7 +896,7 @@ height:${(props)=>props.$height ?? "30px"};
 width:${(props)=>props.$width ?? "100px"};
 position:relative;
 border-radius: ${(props)=> props.$rounded ? 10:0}px;
-
+cursor:pointer;
 border:none;
 
 color:${(props)=>props.$fontColor ?? "black"};
@@ -980,7 +980,7 @@ margin-top:5px;
 const SelectOption= styled.button<LightProps & ButtonProps>`
 height:${(props)=>props.$height ?? "30px"};
 width:100%;
-
+cursor:pointer;
 border-radius:0;
 padding-bottom:5px;
 color:${(props)=>props.$fontColor ?? "black"};
