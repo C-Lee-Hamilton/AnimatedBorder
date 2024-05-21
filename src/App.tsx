@@ -13,7 +13,7 @@ import Five from "./images/5.png";
 import { LightBorder,LightButton,LightSlider,
 LightText,LightLoadbar,LightInput, LightCheck,
 LightRadio, LightSelect,LightToggle,LightInputWithSearch,
-LightSeparator,LightImage } from "./components/LightBorder";
+LightSeparator,LightImage } from "./components/LightComponentLib";
 
 
 export default function App(): JSX.Element {

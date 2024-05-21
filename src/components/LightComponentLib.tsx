@@ -73,7 +73,8 @@ var(--color2),
 var(--color2),
 var(--color3),
 var(--color3),
-var(--color1)`
+var(--color1)
+`
 const colorVar2=`
 var(--color1),
 var(--color1),
@@ -1345,7 +1346,7 @@ export const LightBorder: React.FC<{ children: ReactNode } & LightProps & DivPro
   } as React.CSSProperties
 
   return (
-    <DivContainer {...props} style={cssVariables}>
+    <DivContainer data-testid="light-border" {...props} style={cssVariables}>
       <DivContent {...props}><DivCenter {...props}>{children}</DivCenter></DivContent>
       <Top {...props} />
       <Left {...props} />
@@ -1369,7 +1370,7 @@ export const LightButton: React.FC<{ children: ReactNode } & LightProps & Button
 
   return (
     
-    <ButtonContainer onClick={props.onClick} {...props} style={cssVariables}>
+    <ButtonContainer data-testid="light-button" onClick={props.onClick} {...props} style={cssVariables}>
      <Button {...props}>
      <ButtonContent {...props}>
       {children}
@@ -1405,7 +1406,7 @@ export const LightSlider: React.FC< LightProps & SliderProps > = ({
    } as React.CSSProperties
 
    return (
-    <SliderContainer  style={cssVariables} {...props}>
+    <SliderContainer data-testid="light-slider"  style={cssVariables} {...props}>
       <Slider style={cssVariables} type="range" onChange={props.onChange}value={props.value}step={props.step} min={props.min} max={props.max} {...props}>
 
         
@@ -1427,7 +1428,7 @@ export const LightText: React.FC< { children: ReactNode } & LightProps &ButtonPr
   } as React.CSSProperties
 
   return (
-   <TextDiv {...props}>
+   <TextDiv data-testid="light-text" style={cssVariables}  {...props}>
     <TextContent style={cssVariables} {...props}>{children}</TextContent>
    </TextDiv>
    
@@ -1445,7 +1446,7 @@ export const LightLoadbar: React.FC< LightProps & LoadbarProps > = ({
   } as React.CSSProperties
 
   return (
-   <LoadbarContainer style={cssVariables} {...props}>
+   <LoadbarContainer data-testid="light-loadbar" style={cssVariables} {...props}>
 
     <LoaderFill {...props}>
       
@@ -1468,7 +1469,7 @@ export const LightInput: React.FC<LightProps & InputProps > = ({
  
    return (
      
-     <InputContainer {...props} style={cssVariables}>
+     <InputContainer data-testid="light-input" {...props} style={cssVariables}>
       <InputBorder {...props}>
        <InputContent type={props.type} value={props.value} onChange={props.onChange} placeholder="..."{...props}/> 
        <Top {...props} />
@@ -1498,10 +1499,10 @@ export const LightInputWithSearch: React.FC<LightProps & InputProps > = ({
 
   return (
     
-    <InputContainer {...props} style={cssVariables}>
+    <InputContainer data-testid="light-search" {...props} style={cssVariables}>
      <InputBorder {...props}>
       <InputContent type={props.type} value={props.value} onChange={props.onChange} placeholder="..."{...props}/> 
-      <InputSearchButton {...props} onClick={props.$onSubmit}>&#x1F50E;</InputSearchButton>
+      <InputSearchButton data-testid="light-search-button"  {...props} onClick={props.$onSubmit}>&#x1F50E;</InputSearchButton>
       <Top {...props} />
       <Left {...props} />
    
@@ -1526,8 +1527,8 @@ export const LightCheck: React.FC<LightProps & InputProps > = ({
     '--color3': props.$color3 ?? "lime",
   } as React.CSSProperties
   return(
-<Checkbox  style={cssVariables} {...props}>
-  <input   checked={props.checked} onClick={props.onClick}type="checkbox"/>
+<Checkbox data-testid="light-check" style={cssVariables} {...props}>
+  <input data-testid="light-check-click"   checked={props.checked} onClick={props.onClick}type="checkbox"/>
   <span  className="checkmark">
   <Top  {...props}/>
   <Bottom  {...props}/>
@@ -1548,8 +1549,8 @@ export const LightRadio: React.FC<LightProps & InputProps > = ({
     '--color3': props.$color3 ?? "lime"
   } as React.CSSProperties
   return(
-<Radio  style={cssVariables} {...props}>
-  <input  checked={props.checked} onClick={props.onClick}type="checkbox"/>
+<Radio data-testid="light-radio"  style={cssVariables} {...props}>
+  <input data-testid="light-radio-click"   checked={props.checked} onClick={props.onClick}type="checkbox"/>
   <span  className="checkmark"></span>
   <span   className="uncheckmark"></span>
 </Radio>
@@ -1574,7 +1575,7 @@ const selectClick= (e: React.MouseEvent<HTMLButtonElement>) =>{
 };
   return (
   
-    <SelectContainer style={cssVariables} {...props}>
+    <SelectContainer data-testid="light-select" style={cssVariables} {...props}>
       <SelectButton {...props} onClick={()=>setActive(!active)}>{val}  <Top {...props}/><Bottom {...props}/><Right {...props}/><Left {...props}/></SelectButton>
       
       <SelectDropdown {...props} onClick={()=>setActive(!active)}  style={{visibility:`${active ? "visible": "hidden"}`}}>
@@ -1615,8 +1616,8 @@ export const LightToggle: React.FC< LightProps & SliderProps > = ({
   const [clicked,setClicked]=useState<boolean>(false);
   const clickFunction=()=>{setClicked(!clicked); props.onChange}
   return (
-   <SliderContainer  style={cssVariables} {...props}>
-     <Slider style={cssVariables}onClick={clickFunction} type="range" value={clicked? 1 : 0}step={1} min={0} max={1} {...props}>
+   <SliderContainer data-testid="light-toggle" style={cssVariables} {...props}>
+     <Slider data-testid="light-toggle-click"  style={cssVariables}onClick={clickFunction} type="range" value={clicked? 1 : 0}step={1} min={0} max={1} {...props}>
      </Slider>
   
   </SliderContainer>
@@ -1637,7 +1638,7 @@ export const LightSeparator: React.FC< LightProps> = ({
   } as React.CSSProperties
  
   return (
-<Separator style={cssVariables} {...props}/>
+<Separator data-testid="light-separator" style={cssVariables} {...props}/>
    
   );
 };
@@ -1655,7 +1656,7 @@ export const LightImage: React.FC< LightProps & ImageProps> = ({
   } as React.CSSProperties
  
   return (
-<Image alt=" " src={props.src}  style={cssVariables} {...props}/>
+<Image data-testid="light-image" alt=" " src={props.src}  style={cssVariables} {...props}/>
    
   );
 };

@@ -1,4 +1,4 @@
-import { LightBorder } from "./LightBorder";
+import { LightBorder } from "./LightComponentLib";
 
 export default function Button(): JSX.Element {
   return (
