@@ -61,7 +61,6 @@ return (
     $color1="#686868"
     $color2="#7d7c7c"
     $color3="#b6b6b6"
- 
     $rounded={false}>
 
     <div className="showcaseCol">
@@ -80,7 +79,7 @@ return (
         $color1="lime"
         $color2="cyan"
         $color3="magenta"
-        $fontsize="20px"><h1 className="header">Animation Gradiation Component Librarium</h1></LightText> 
+        $fontsize="20px"><h1 className="header">Animated Gradient Component Library</h1></LightText> 
         </div>  
         <LightSeparator/>
         <div id="checkbox-radio-buttons"className="input-row">
@@ -130,6 +129,8 @@ return (
             min={0}
             max={10}
             $height="45px"
+            $slideCenterHeight="45px"
+            $slideCenterWidth="45px"
           />
           <LightSlider
             $roundedSelector={false}
@@ -169,8 +170,11 @@ return (
         </div>
         <LightSeparator/>
         <div id="selects" className="input-row">
-        <LightSelect  $rounded ={true} $outline={false} $options={selectOptions} $setState={setSelectVal} />
+        <LightSelect 
+        $initialButtonText="select"
+        $rounded ={true} $outline={false} $options={selectOptions} $setState={setSelectVal} />
         <LightSelect
+$initialButtonText="select"
         $color1="magenta"
         $color2="violet"
         $color3="cyan"

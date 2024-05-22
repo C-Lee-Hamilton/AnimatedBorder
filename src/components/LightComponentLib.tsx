@@ -15,6 +15,7 @@ interface LightProps{
   $fontColor?:string;
   $textAlign?:string;
   $outline?:boolean;
+  $margin?:string;
 }
 
 interface DivProps {
@@ -27,7 +28,7 @@ interface DivProps {
 
 interface ButtonProps{
   onClick?: (event:any) => void;
-  $margin?:string;
+ 
 }
 
 interface SliderProps{
@@ -60,6 +61,7 @@ interface SelectProps {
   $setState?: (value:string) => void;
   $selectsToRight?:boolean;
   $maxDropHeight?:string;
+  $initialButtonText?:string;
 }
 
 interface ImageProps{
@@ -120,7 +122,7 @@ var(--color1)
 const DivContainer = styled.div<LightProps>`
   
   position: absolute;
- 
+  margin:${(props)=>props.$margin ?? "0px"};
   
   height: ${(props) => props.$height ?? "100%"};
   width: ${(props) => props.$width ?? "100%"};
@@ -157,7 +159,7 @@ const ButtonContainer = styled.div<LightProps & ButtonProps >`
 min-height: ${(props) => props.$height ?? "30px"};
 min-width: ${(props) => props.$width ?? "100px"};
 font-size:${(props)=>props.$fontsize ?? "1em"};
-
+margin:${(props)=>props.$margin ?? "0px"};
   position: relative;
   :hover {
     cursor:pointer;
@@ -245,7 +247,7 @@ z-index:1;
 const SliderContainer=styled.div<LightProps & SliderProps>`
 height:var(--height);
 width:var(--width);
-
+margin:${(props)=>props.$margin ?? "0px"};
 padding:2px;
 position:relative;
 border-radius: ${(props)=>props.$rounded ? "100px" : "0px"};
@@ -361,10 +363,10 @@ cursor: pointer;
 `
 
 const TextDiv=styled.div<LightProps>`
-
+margin:${(props)=>props.$margin ?? "0px"};
 padding:0px;
 position:relative;
-margin:0px;
+
 
 `
 const TextContent=styled.button<LightProps & ButtonProps>`
@@ -423,7 +425,7 @@ animation: ColorText ${(props) => props.$speed ?? "1s"} infinite linear;
 const LoadbarContainer=styled.div<LightProps & LoadbarProps>`
 height:${(props)=>props.$height ?? "25px"};
 width:${(props)=>props.$width ?? "300px"};
-
+margin:${(props)=>props.$margin ?? "0px"};
 justify-content:center;
 align-items:center;
 display:flex;
@@ -532,7 +534,7 @@ min-height: ${(props) => props.$height ?? "40px"};
 min-width: ${(props) => props.$width ?? "200px"};
 background-color:${(props) => props.$contentColor ?? "black"};
 border-radius: ${(props)=> props.$rounded ? 10:0}px;
-
+margin:${(props)=>props.$margin ?? "0px"};
 padding:0px;
   position: relative;
 
@@ -702,7 +704,7 @@ const Checkbox = styled.label<LightProps & InputProps>`
   display: flex;
   position: relative;
   padding: 0px;
-  margin: 0px;
+  margin:${(props)=>props.$margin ?? "0px"};
   cursor: pointer;
   font-size: 22px;
  
@@ -799,7 +801,7 @@ const Radio = styled.label<LightProps & InputProps>`
   cursor: pointer;
   font-size: 0px;
   user-select: none;
-
+  margin:${(props)=>props.$margin ?? "0px"};
  
   
   input {
@@ -883,6 +885,7 @@ const Radio = styled.label<LightProps & InputProps>`
 const SelectContainer= styled.div<LightProps>`
 width:${(props)=>props.$width ?? "100px"};
 position:relative;
+margin:${(props)=>props.$margin ?? "0px"};
 border-radius: ${(props)=> props.$rounded ? 10:0}px;
 z-index:3;
 display:flex;
@@ -1038,6 +1041,7 @@ margin-top:0px;
 
 const Separator=styled.div<LightProps>`
 position:relative;
+margin:${(props)=>props.$margin ?? "0px"};
 min-height:${(props)=>props.$height ?? "2px"};
 min-width:${(props)=>props.$width ?? "90%"};
 border-radius:100%;
@@ -1089,7 +1093,7 @@ const Image=styled.img<LightProps>`
 height: ${(props)=>props.$height ?? "50px"};
 width:  ${(props)=>props.$width?? "50px"};
 position:relative;
-
+margin:${(props)=>props.$margin ?? "0px"};
 
 filter: drop-shadow(0px -4px 3px var(--color1)) drop-shadow(0px 4px 3px var(--color1))
   drop-shadow(0px 2px 3px var(--color2)) drop-shadow(0px -2px 3px var(--color3));
@@ -1557,7 +1561,7 @@ export const LightRadio: React.FC<LightProps & InputProps > = ({
   );
 };
 
-export const LightSelect: React.FC<   LightProps & SelectProps & ButtonProps > = ({
+export const LightSelect: React.FC<   LightProps & SelectProps & ButtonProps > = ({ 
   
   ...props
 }) => {
@@ -1567,7 +1571,7 @@ export const LightSelect: React.FC<   LightProps & SelectProps & ButtonProps > =
     '--color3': props.$color3 ?? "lime"
   } as React.CSSProperties
 const selectArray:string[]=props.$options || [];
-const [val,setVal]=useState<string>("select")
+const [val,setVal]=useState<string>("null");
 const [active,setActive]=useState<boolean>(false);
 const selectClick= (e: React.MouseEvent<HTMLButtonElement>) =>{
   setVal(e.currentTarget.name);
@@ -1576,7 +1580,7 @@ const selectClick= (e: React.MouseEvent<HTMLButtonElement>) =>{
   return (
   
     <SelectContainer data-testid="light-select" style={cssVariables} {...props}>
-      <SelectButton {...props} onClick={()=>setActive(!active)}>{val}  <Top {...props}/><Bottom {...props}/><Right {...props}/><Left {...props}/></SelectButton>
+      <SelectButton {...props} onClick={()=>setActive(!active)}>{val==="null" ? props.$initialButtonText : val}  <Top {...props}/><Bottom {...props}/><Right {...props}/><Left {...props}/></SelectButton>
       
       <SelectDropdown {...props} onClick={()=>setActive(!active)}  style={{visibility:`${active ? "visible": "hidden"}`}}>
       <Bottom/><Right/><Left/>
