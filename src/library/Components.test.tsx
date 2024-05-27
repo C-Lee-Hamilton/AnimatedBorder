@@ -1,22 +1,23 @@
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-import { LightButton } from "../components/library/LightButton";
-import { LightBorder } from "../components/library/LightBorder";
-import { LightSlider } from "../components/library/LightSlider";
-import { LightText } from "../components/library/LightText";
-import { LightLoadbar } from "../components/library/LightLoadBar";
-import { LightInput } from "../components/library/LightInput";
-import { LightCheck } from "../components/library/LightCheck";
-import { LightRadio } from "../components/library/LightRadio";
-import { LightSelect } from "../components/library/LightSelect";
-import { LightToggle } from "../components/library/LightToggle";
-import { LightInputWithSearch } from "../components/library/LightInputWithSearch";
-import { LightSeparator } from "../components/library/LightSeparator";
-import { LightImage } from "../components/library/LightImage";
-    const onClickMock=jest.fn();
+import { LightButton } from "./components/LightButton";
+import { LightBorder } from "./components/LightBorder";
+import { LightSlider } from "./components/LightSlider";
+import { LightText } from "./components/LightText";
+import { LightLoadbar } from "./components/LightLoadBar";
+import { LightInput } from "./components/LightInput";
+import { LightCheck } from "./components/LightCheck";
+import { LightRadio } from "./components/LightRadio";
+import { LightSelect } from "./components/LightSelect";
+import { LightToggle } from "./components/LightToggle";
+import { LightInputWithSearch } from "./components/LightInputWithSearch";
+import { LightSeparator } from "./components/LightSeparator";
+import { LightImage } from "./components/LightImage";
+
+const onClickMock=jest.fn();
     
-         test('LightBorder-render', () => {
+          test('LightBorder-render', () => {
             const { getByTestId } = render(<LightBorder $color1="red" $color2="white" $color3="blue">ipsum</LightBorder> );
             const lightElement = getByTestId('light-border');
             expect(lightElement).toBeInTheDocument();

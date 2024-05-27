@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { LightProps } from "../types/Light";
 import { LoadbarProps } from "../types/Loadbar";
-import { colorVar1,colorVar2,colorVar3,colorVar4,colorVar5,colorVar6 } from "../ColorVariables";
+import { colorVar1,colorVar2,colorVar3,colorVar4,colorVar5,colorVar6 } from "./ColorVariables";
 
 
 export const LoadbarContainer=styled.div<LightProps & LoadbarProps>`

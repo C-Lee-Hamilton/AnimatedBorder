@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { LightProps } from "../types/Light";
-import { colorVar1,colorVar2,colorVar3,colorVar4,colorVar5,colorVar6 } from "../ColorVariables";
+import { colorVar1,colorVar2,colorVar3,colorVar4,colorVar5,colorVar6 } from "./ColorVariables";
 
 
 export const Separator=styled.div<LightProps>`

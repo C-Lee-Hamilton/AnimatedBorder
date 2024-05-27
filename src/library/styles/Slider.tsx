@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { LightProps } from "../types/Light";
 import { SliderProps } from "../types/Slider";
-import { colorVar1,colorVar2,colorVar3,colorVar4,colorVar5,colorVar6 } from "../ColorVariables";
+import { colorVar1,colorVar2,colorVar3,colorVar4,colorVar5,colorVar6 } from "./ColorVariables";
 
 
 export const SliderContainer=styled.div<LightProps & SliderProps>`
