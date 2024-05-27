@@ -29,8 +29,8 @@ export const LightSelect: React.FC<   LightProps & SelectProps & ButtonProps > =
         <SelectDropdown {...props} onClick={()=>setActive(!active)}  style={{visibility:`${active ? "visible": "hidden"}`}}>
         <Bottom/><Right/><Left/>
         <SelectScroll >
-        {selectArray.map((option) => (
-          <SelectDiv>
+        {selectArray.map((option,index) => (
+          <SelectDiv key={index}>
             <SelectOption {...props} key={option} name={option} onClick={(e:any)=>selectClick(e)}>
              
               {option}

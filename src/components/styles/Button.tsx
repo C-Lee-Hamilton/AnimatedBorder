@@ -6,7 +6,7 @@ import { colorVar1,colorVar2,colorVar3,colorVar4,colorVar5,colorVar6 } from "../
 
 export const ButtonContainer = styled.div<LightProps & ButtonProps >`
 min-height: ${(props) => props.$height ?? "30px"};
-min-width: ${(props) => props.$width ?? "100px"};
+width: ${(props) => props.$width ?? "100px"};
 font-size:${(props)=>props.$fontsize ?? "1em"};
 margin:${(props)=>props.$margin ?? "0px"};
   position: relative;

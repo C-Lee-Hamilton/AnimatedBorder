@@ -1,9 +1,19 @@
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
-
-import { LightBorder,LightButton,LightSlider,LightText,LightLoadbar,LightInput, LightCheck,
-         LightRadio, LightSelect,LightToggle,LightInputWithSearch,LightSeparator,LightImage } from "../components/LightComponentLib";
+import { LightButton } from "../components/library/LightButton";
+import { LightBorder } from "../components/library/LightBorder";
+import { LightSlider } from "../components/library/LightSlider";
+import { LightText } from "../components/library/LightText";
+import { LightLoadbar } from "../components/library/LightLoadBar";
+import { LightInput } from "../components/library/LightInput";
+import { LightCheck } from "../components/library/LightCheck";
+import { LightRadio } from "../components/library/LightRadio";
+import { LightSelect } from "../components/library/LightSelect";
+import { LightToggle } from "../components/library/LightToggle";
+import { LightInputWithSearch } from "../components/library/LightInputWithSearch";
+import { LightSeparator } from "../components/library/LightSeparator";
+import { LightImage } from "../components/library/LightImage";
     const onClickMock=jest.fn();
     
          test('LightBorder-render', () => {

@@ -1,5 +1,18 @@
 import "./styles.css";
 import React,{useState,useEffect} from 'react';
+import { LightButton } from "./components/library/LightButton";
+import { LightBorder } from "./components/library/LightBorder";
+import { LightSlider } from "./components/library/LightSlider";
+import { LightText } from "./components/library/LightText";
+import { LightLoadbar } from "./components/library/LightLoadBar";
+import { LightInput } from "./components/library/LightInput";
+import { LightCheck } from "./components/library/LightCheck";
+import { LightRadio } from "./components/library/LightRadio";
+import { LightSelect } from "./components/library/LightSelect";
+import { LightToggle } from "./components/library/LightToggle";
+import { LightInputWithSearch } from "./components/library/LightInputWithSearch";
+import { LightSeparator } from "./components/library/LightSeparator";
+import { LightImage } from "./components/library/LightImage";
 
 import Six from "./images/0.png";
 import One from "./images/1.png";
@@ -7,14 +20,6 @@ import Two from "./images/2.png";
 import Three from "./images/3.png";
 import Four from "./images/4.png";
 import Five from "./images/5.png";
-
-
-
-import { LightBorder,LightButton,LightSlider,
-LightText,LightLoadbar,LightInput, LightCheck,
-LightRadio, LightSelect,LightToggle,LightInputWithSearch,
-LightSeparator,LightImage } from "./components/LightComponentLib";
-
 
 export default function App(): JSX.Element {
   const [sliderValue,setSliderValue]=useState<number>(5);
@@ -25,10 +30,7 @@ export default function App(): JSX.Element {
   const [toggle,setToggle]=useState<boolean>(false);
   const selectOptions:string[]=["red","blue","white","orange","yellow","green","violet","hazel","cyan"];
   const selectOptions2:string[]=["red","blue","white","orange","yellow","green","violet","hazel","cyan"];
-  const cleanup=()=>{
-    console.log(SelectVal,SelectVal2)
-  }
-  cleanup();
+
   // progress-bar
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,6 +54,8 @@ const toggleSetter=()=>{setToggle(!toggle)};
   
 return (
   <div className="App">
+
+
     <LightBorder
     $insetBorderWidth={15}
     $contentColor="#36454f"
