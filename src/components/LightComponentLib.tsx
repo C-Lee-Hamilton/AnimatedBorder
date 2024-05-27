@@ -19,16 +19,13 @@ interface LightProps{
 }
 
 interface DivProps {
-  //justify content
   $contentAlignX?:string;
-  //align items
   $contentAlignY?:string;
   $insetBorderWidth?:number;
 }
 
 interface ButtonProps{
-  onClick?: (event:any) => void;
- 
+  onClick?: (event:any) => void; 
 }
 
 interface SliderProps{
@@ -471,7 +468,7 @@ animation: ColorLoad ${(props) => props.$speed ?? "1s"} infinite linear;
   );
 }
 `
-const LoaderFill=styled.div<LightProps & LoadbarProps>`
+const LoadbarFill=styled.div<LightProps & LoadbarProps>`
 width:95%;
 height:90%;
 background-color:black;
@@ -1452,10 +1449,10 @@ export const LightLoadbar: React.FC< LightProps & LoadbarProps > = ({
   return (
    <LoadbarContainer data-testid="light-loadbar" style={cssVariables} {...props}>
 
-    <LoaderFill {...props}>
+    <LoadbarFill {...props}>
       
     <LoadbarContent {...props} />
-    </LoaderFill>
+    </LoadbarFill>
    </LoadbarContainer>
    
   );

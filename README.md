@@ -29,7 +29,7 @@
 | $insetBorderWidth | Number, only use if trying to use a double border, set to the width of the second border |
 
 ```
-import { LightBorder } from "@the_grid/AGCL";
+import { LightBorder } from "@the_grid/agcl";
 const MyComponent = () => {
  <div>
     <LightBorder
@@ -72,7 +72,7 @@ const MyComponent = () => {
 Takes an onClick.
 
 ```
-import { LightButton } from "@the_grid/AGCL";
+import { LightButton } from "@the_grid/agcl";
 const MyComponent = () => {
  <div>
           <LightButton
@@ -108,7 +108,7 @@ const MyComponent = () => {
 | **String**   | $slideCenterHeight | $slideCenterWidth |      |       |     |
 
 ```
-import { LightSlider } from "@the_grid/AGCL";
+import { LightSlider } from "@the_grid/agcl";
 const MyComponent = () => {
  <div>
        <LightSlider
@@ -132,7 +132,7 @@ const MyComponent = () => {
 ### LightText
 
 ```
-import { LightText } from "@the_grid/AGCL";
+import { LightText } from "@the_grid/agcl";
 const MyComponent = () => {
  <div>
     <LightText
@@ -153,7 +153,7 @@ const MyComponent = () => {
 Takes in a number variable for $loadValue for progress, use a useEffect or any other applicable method to increase the $loadValue
 
 ```
-import { LightText } from "@the_grid/AGCL";
+import { LightText } from "@the_grid/agcl";
 const MyComponent = () => {
 const [loadVal,setLoadVal]=useState(0);
 
@@ -175,7 +175,7 @@ const [loadVal,setLoadVal]=useState(0);
 | **Function** | onChange |       |
 
 ```
-import { LightInput } from "@the_grid/AGCL";
+import { LightInput } from "@the_grid/agcl";
 const MyComponent = () => {
 
 
@@ -203,7 +203,7 @@ const MyComponent = () => {
 | **Function** | onChange | $onSubmit |
 
 ```
-import { LightInputWithSearch } from "@the_grid/AGCL";
+import { LightInputWithSearch } from "@the_grid/agcl";
 const MyComponent = () => {
 
 
@@ -232,7 +232,7 @@ const MyComponent = () => {
 | **Function** | onClick |
 
 ```
-import { LightCheck } from "@the_grid/AGCL";
+import { LightCheck } from "@the_grid/agcl";
 const MyComponent = () => {
 
 
@@ -252,7 +252,7 @@ const MyComponent = () => {
 | **Function** | onClick |
 
 ```
-import { LightRadio } from "@the_grid/AGCL";
+import { LightRadio } from "@the_grid/agcl";
 const MyComponent = () => {
 
 
@@ -279,7 +279,7 @@ const MyComponent = () => {
 | $initialButtonText | Button text                                       |
 
 ```
-import { LightSelect } from "@the_grid/AGCL";
+import { LightSelect } from "@the_grid/agcl";
 
 const arr=["red","green","blue"]
 const MyComponent = () => {
@@ -308,7 +308,7 @@ const MyComponent = () => {
 Takes in an optional onChange
 
 ```
-import { LightToggle } from "@the_grid/AGCL";
+import { LightToggle } from "@the_grid/agcl";
 
 
 const MyComponent = () => {
@@ -328,7 +328,7 @@ const MyComponent = () => {
 ### LightSeparator
 
 ```
-import { LightSeparator } from "@the_grid/AGCL";
+import { LightSeparator } from "@the_grid/agcl";
 
 
 const MyComponent = () => {
@@ -349,7 +349,7 @@ const MyComponent = () => {
 Takes in src
 
 ```
-import { LightImage } from "@the_grid/AGCL";
+import { LightImage } from "@the_grid/agcl";
 
 
 const MyComponent = () => {
