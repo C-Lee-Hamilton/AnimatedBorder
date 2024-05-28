@@ -1,42 +1,45 @@
 {
-  "name": "border-colors",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "@the_grid/agcl",
+  "version": "1.0.0",
+  "main": "src/library/index.ts",
+  "files": [
+    "src/**/*"
+  ],
+  "keywords": [
+    "ui",
+    "components",
+    "react",
+    "typescript",
+    "styled-components",
+    "animated",
+    "glow",
+    "colorful",
+    "animation",
+    "effects"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/C-Lee-Hamilton/AnimatedBorder/tree/NPM"
+  },
+  "author": "C-Lee-Hamilton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/C-Lee-Hamilton/AnimatedBorder/tree/NPM"
+  },
+  "homepage": "https://github.com/C-Lee-Hamilton/AnimatedBorder/blob/NPM/README.md",
   "scripts": {
-    "dev": "vite --port 3000 --host ",
-    "start": "start http://localhost:3000/ && vite --port 3000 --host  ",
-    "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "test": "react-scripts test"
+    "build": "tsc"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "styled-components": "^6.1.9"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.5",
-    "@babel/preset-env": "^7.24.5",
-    "@babel/preset-react": "^7.24.1",
-    "@babel/preset-typescript": "^7.24.1",
-    "@testing-library/jest-dom": "^6.4.5",
-    "@testing-library/react": "^15.0.7",
-    "@types/jest": "^29.5.12",
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "@types/styled-components": "^5.1.34",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "babel-jest": "^29.7.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.6",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.2",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0"
+    "@types/react": "^17.0.21",
+    "@types/react-dom": "^17.0.9",
+    "@types/styled-components": "^5.1.15",
+    "typescript": "^4.4.4",
+    "@tsconfig/recommended": "^1.0.1"
   }
 }

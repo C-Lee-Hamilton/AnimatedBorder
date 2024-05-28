@@ -2,7 +2,7 @@
 
 ## Description
 
-###### Animated gradient components using TSX and Styled Components. Use your own colors, or the default cyan, hotpink, lime, and watch them circle around your screen, buttons, or any of the other components in this library.
+###### Animated gradient components using TSX and Styled Components. Use your own colors, or the default cyan, hotpink, lime, and watch them circle around your screen, buttons, or any of the other components in this library. Refer to image at the end of this document for visual reference.
 
 ## Features
 
