@@ -370,4 +370,4 @@ const MyComponent = () => {
 ## Gallery
 
 ![alt text.](/CLImage.png)
-![alt vid.](/librarydemo.mp4)
+![alt vid.](/demo.mp4)
