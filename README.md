@@ -370,3 +370,7 @@ const MyComponent = () => {
 ## Gallery
 
 ![alt text.](/CLImage.png)
+<video width="320" height="240" controls>
+
+  <source src="/librarydemo.mp4" type="video/mp4">
+</video>
